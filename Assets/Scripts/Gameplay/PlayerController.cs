@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+
+public class PlayerController : MonoBehaviour, IManager {
     public float movementSpeed;
     public float attackSpeed;
     public float maxHealth;
     public float invurnabilityDurationOnDamageTakenInSeconds;
+    public float basicAttackRange;
+    public float basicAttackDamage;
+
 
     private float currentHealth;
     private float currentInvurnabilityDuration;
@@ -14,6 +18,9 @@ public class PlayerController : MonoBehaviour {
 
     private CharacterController controller;
     private Vector3 currentMovement;
+
+
+    public List<BaseUpgradeObject> activeUpgrades;
 
     private void Awake()
     {
@@ -35,8 +42,6 @@ public class PlayerController : MonoBehaviour {
             currentInvurnabilityDuration = invurnabilityDurationOnDamageTakenInSeconds;
             currentHealth -= someDamage;
 
-
-
             if (currentHealth < 0)
             {
                 Destroy(gameObject);
@@ -50,17 +55,43 @@ public class PlayerController : MonoBehaviour {
         
     }
 
-
-
-    private void Update()
+    private void Movement()
     {
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input.Normalize();
 
         currentMovement.x = input.x * movementSpeed * Time.deltaTime;
         currentMovement.z = input.y * movementSpeed * Time.deltaTime;
-
         controller.Move(currentMovement);
+
+        transform.position = new Vector3(transform.position.x, 1, transform.position.z);
     }
 
+
+    private void Attack()
+    {
+       //var foundColliders =  Physics.OverlapSphere(transform.position, basicAttackRange);
+
+
+       // foreach (var item in foundColliders)
+       // {
+       //     if (item.GetComponent<Damagable>())
+       //     {
+       //         var damageable = item.GetComponent<Damagable>();
+
+       //         damageable.Hit(basicAttackDamage, gameObject);
+       //     }
+       // }
+    }
+
+    private void Update()
+    {
+        Movement();
+        //Attack();
+    }
+
+    public void OnLoad()
+    {
+       
+    }
 }
