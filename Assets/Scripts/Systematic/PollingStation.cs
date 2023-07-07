@@ -25,16 +25,18 @@ public class PollingStation
     }
 
 
-    private Dictionary<System.Type, Manager> managers;
+    private Dictionary<System.Type, MonoBehaviour> managers;
     private void LoadManagers() {
         //MonoBehaviour.DontDestroyOnLoad(gameObject);//only dont destroy on load this gameObject -> all managers to persist between scenes should be a child (NOTE: all others wont be loaded tho)
-        managers = new Dictionary<System.Type, Manager>();
+        managers = new Dictionary<System.Type, MonoBehaviour>();
 
-        Manager[] loadedManagers = Object.FindObjectsOfType<Manager>(true);
-        foreach(Manager manager in loadedManagers) {
+        MonoBehaviour[] ojs = Object.FindObjectsOfType<MonoBehaviour>();
+        foreach(MonoBehaviour manager in ojs) {
+            if (!typeof(IManager).IsAssignableFrom(manager.GetType())) continue;//skip all non-Managers
+
             if (!managers.ContainsKey(manager.GetType())) {
                 managers.Add(manager.GetType(), manager);
-                manager.OnLoad();
+                (manager as IManager).OnLoad();
             }
             else {
                 Debug.LogError(manager.gameObject.name + " of type " + manager.GetType() + " was a dublicate");
@@ -43,7 +45,7 @@ public class PollingStation
     }
 
 
-    public static T Get<T>() where T : Manager {
+    public static T Get<T>() where T : MonoBehaviour {
         return (T)Get()?.managers[typeof(T)];
     }
 
