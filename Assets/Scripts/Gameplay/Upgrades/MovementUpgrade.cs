@@ -6,8 +6,8 @@ using UnityEngine;
 public class MovementUpgrade : BaseUpgradeObject {
 
     public float additionalMovementSpeed;
-    public override void ExecuteUpgrade(PlayerController aController)
+    public override void OnUpdate(PlayerController aController)
     {
-        aController.movementSpeed += additionalMovementSpeed;
+        aController.movementSpeed = aController.baseMovementSpeed + (upgradeCount * additionalMovementSpeed);
     }
 }

@@ -3,54 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : Damagable, IManager {
-    public float movementSpeed;
-    public float attackSpeed;
-    public float invurnabilityDurationOnDamageTakenInSeconds;
-    public float basicAttackRange;
-    public float basicAttackDamage;
+   
+    public float baseMovementSpeed;
+    [HideInInspector] public float movementSpeed;
 
-
-    private float currentHealth;
-    private float currentInvurnabilityDuration;
-
-
+    private UpgradeManager upgradeManager;
     private CharacterController controller;
     private Vector3 currentMovement;
 
 
-    public List<BaseUpgradeObject> activeUpgrades;
+    //public List<BaseWeaponUpgrade> activeWeapons;
 
     private void Awake()
     {
+        movementSpeed = baseMovementSpeed;
+        upgradeManager = GetComponent<UpgradeManager>();
         controller = GetComponent<CharacterController>() != null ? GetComponent<CharacterController>() : gameObject.AddComponent<CharacterController>();
-        Spawn();
-    }
 
-
-
-    public void Spawn()
-    {
-        currentHealth = maxHealth;
-    }
-
-    public void TakeDamage(float someDamage)
-    {
-        if(currentInvurnabilityDuration <= 0)
-        {
-            currentInvurnabilityDuration = invurnabilityDurationOnDamageTakenInSeconds;
-            currentHealth -= someDamage;
-
-            if (currentHealth < 0)
-            {
-                Destroy(gameObject);
-            }
-        }
-        else
-        {
-            currentInvurnabilityDuration -= Time.deltaTime;
-        }
-
-        
+        //Start with a basic weapon
+        upgradeManager.GainWeapon(0);
     }
 
     private void Movement()
@@ -65,22 +36,6 @@ public class PlayerController : Damagable, IManager {
         transform.position = new Vector3(transform.position.x, 1, transform.position.z);
     }
 
-
-    private void Attack()
-    {
-       //var foundColliders =  Physics.OverlapSphere(transform.position, basicAttackRange);
-
-
-       // foreach (var item in foundColliders)
-       // {
-       //     if (item.GetComponent<Damagable>())
-       //     {
-       //         var damageable = item.GetComponent<Damagable>();
-
-       //         damageable.Hit(basicAttackDamage, gameObject);
-       //     }
-       // }
-    }
 
     private void Update()
     {

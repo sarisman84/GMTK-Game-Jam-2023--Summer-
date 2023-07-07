@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76f20eadbf895e246be8da42515d40d2, type: 3}
-  m_Name: New Test Object
+  m_Script: {fileID: 11500000, guid: 020fb8d91543dc441bdaa7de92ba76b4, type: 3}
+  m_Name: New Movement Upgrade
   m_EditorClassIdentifier: 
-  myTestFloat: 0
-  myTestString: 
-  recursiveScriptableObject: {fileID: 11400000}
+  description: Increase movement speed by something
+  upgradeCount: 0
+  additionalMovementSpeed: 1
