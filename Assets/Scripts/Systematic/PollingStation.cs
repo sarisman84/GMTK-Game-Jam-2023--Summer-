@@ -45,7 +45,7 @@ public class PollingStation
     }
 
 
-    public static T Get<T>() where T : MonoBehaviour {
+    public static T Get<T>() where T : MonoBehaviour, IManager {
         return (T)Get()?.managers[typeof(T)];
     }
 
