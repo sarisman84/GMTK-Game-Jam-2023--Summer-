@@ -2,14 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
-public class PlayerController : MonoBehaviour, IManager {
+public class PlayerController : Damagable, IManager {
     public float movementSpeed;
     public float attackSpeed;
-    public float maxHealth;
     public float invurnabilityDurationOnDamageTakenInSeconds;
     public float basicAttackRange;
     public float basicAttackDamage;
@@ -87,7 +82,6 @@ public class PlayerController : MonoBehaviour, IManager {
        // }
     }
 
-<<<<<<< HEAD
     private void Update()
     {
         Movement();
@@ -98,7 +92,4 @@ public class PlayerController : MonoBehaviour, IManager {
     {
        
     }
-=======
-    public void OnLoad() {}
->>>>>>> main
 }
