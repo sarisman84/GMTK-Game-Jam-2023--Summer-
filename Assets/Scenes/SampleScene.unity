@@ -357,6 +357,9 @@ MonoBehaviour:
   health: 0
   velocity: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
+  closeAttackDamage: 10
+  closeAttackRad: 2
+  closeAttackCooldown: 0.5
 --- !u!143 &781511743
 CharacterController:
   m_ObjectHideFlags: 0
@@ -652,9 +655,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce37d151746548e4f96f5fa28094a4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 0
   movementSpeed: 0
   attackSpeed: 0
-  maxHealth: 0
   invurnabilityDurationOnDamageTakenInSeconds: 0
   basicAttackRange: 0
   basicAttackDamage: 0

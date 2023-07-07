@@ -1,0 +1,4 @@
+
+- simple: will run straight at the player
+- fast: will dash at the player
+- grapple: will throw a net, to stun the player and make him not able to run away

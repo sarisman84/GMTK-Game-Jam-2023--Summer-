@@ -15,7 +15,7 @@ public class Damagable : MonoBehaviour
         health = Mathf.Max(health, maxHealth);
     }
 
-    public virtual void Hit(float damage, GameObject attacker) {
+    public virtual void Hit(float damage, MonoBehaviour attacker) {
         health -= damage;
         health = Mathf.Max(health, 0);
 
@@ -23,7 +23,7 @@ public class Damagable : MonoBehaviour
             OnDeath(attacker);
     }
 
-    public virtual void OnDeath(GameObject attacker) {
+    public virtual void OnDeath(MonoBehaviour attacker) {
 
     }
 }
