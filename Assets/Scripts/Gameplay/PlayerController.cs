@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour, IManager {
     public float movementSpeed;
     public float attackSpeed;
     public float maxHealth;
@@ -63,4 +63,5 @@ public class PlayerController : MonoBehaviour {
         controller.Move(currentMovement);
     }
 
+    public void OnLoad() {}
 }
