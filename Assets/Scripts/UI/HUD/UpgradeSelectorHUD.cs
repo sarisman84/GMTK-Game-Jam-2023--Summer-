@@ -90,6 +90,15 @@ public class UpgradeSelectorHUD : MonoBehaviour, IManager {
 
     private IEnumerator FadeCoroutine(FadeMode aMode)
     {
+        if(aMode == FadeMode.Out)
+        {
+            foreach (var item in selectionButtons)
+            {
+                item.button.onClick.RemoveAllListeners();
+            }
+        }
+
+
         float elapsed = 0.0f;
 
         while (aMode == FadeMode.Out ? (elapsed < fadeOutDuration) : (elapsed < fadeInDuration))

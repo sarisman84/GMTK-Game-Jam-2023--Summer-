@@ -109,5 +109,20 @@ public abstract class BaseWeaponObject : ScriptableObject {
         if (!foundEntity) return Vector3.zero;
         return (foundEntity.transform.position - anOrigin.transform.position).normalized;
     }
+
+    public static Quaternion AngleFromDir(Vector3 aDirection, Vector3 anUpDir)
+    {
+        return Quaternion.LookRotation(aDirection, anUpDir);
+    }
+
+    public static Vector3 DirFromAngle(float anAngleInDegrees, float localEuelerAnglesRot)
+    {
+        if (localEuelerAnglesRot != 0)
+            anAngleInDegrees += localEuelerAnglesRot;
+
+        return new Vector3(Mathf.Sin(anAngleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(anAngleInDegrees * Mathf.Deg2Rad));
+    }
+
     public abstract void OnUpdate(PlayerController aController);
+    public virtual void OnDrawGizmo(PlayerController aController) { }
 }
