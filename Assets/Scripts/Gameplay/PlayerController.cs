@@ -21,6 +21,12 @@ public class PlayerController : Damagable, IManager {
     private float currentInvurnabilityDuration = 0.0f;
     private bool hasBeenHit = false;
 
+    public bool isActive
+    {
+        private set;
+        get;
+    }
+
 
     //public List<BaseWeaponUpgrade> activeWeapons;
 
@@ -34,11 +40,14 @@ public class PlayerController : Damagable, IManager {
         //Start with a basic weapon
         upgradeManager.GainWeapon(0);
         mainCamera = Camera.main;
+
+
+        PollingStation.Get<TeamsManager>().AddToTeam<PlayerController>(gameObject);
     }
 
     private void Movement()
     {
-       
+
 
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input.Normalize();
@@ -83,7 +92,7 @@ public class PlayerController : Damagable, IManager {
 
     private void Update()
     {
-        if (!GameplayManager.Get.runtimeActive) return;
+        if (!BackendManager.Get.runtimeActive) return;
         UpdateInvurnabilityTimer();
         Movement();
         //Attack();
@@ -104,5 +113,12 @@ public class PlayerController : Damagable, IManager {
         Gizmos.color = Color.red * new Color(1, 1, 1, Mathf.Abs(invurnabilityDurationInSeconds - currentInvurnabilityDuration));
         Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.localScale);
         Gizmos.DrawMesh(meshFilter.sharedMesh, Vector3.zero);
+    }
+
+
+    public void SetActive(bool aNewState)
+    {
+        BackendManager.Get.runtimeActive = aNewState;
+        meshFilter.gameObject.SetActive(aNewState);
     }
 }

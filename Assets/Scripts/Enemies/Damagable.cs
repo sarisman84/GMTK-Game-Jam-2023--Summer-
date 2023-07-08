@@ -17,6 +17,9 @@ public class Damagable : MonoBehaviour
     }
 
     public virtual void Hit(float damage, MonoBehaviour attacker) {
+
+        if (PollingStation.Get<TeamsManager>().AreInTheSameTeam(gameObject, attacker.gameObject)) return;
+
         health -= damage;
         health = Mathf.Max(health, 0);
 

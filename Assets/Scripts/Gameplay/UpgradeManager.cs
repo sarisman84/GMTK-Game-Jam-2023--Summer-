@@ -50,16 +50,25 @@ public class UpgradeManager : MonoBehaviour, IManager {
 
                 UpgradeSelectorHUD.SelectionDesc desc = new UpgradeSelectorHUD.SelectionDesc();
 
-                desc.description = potentialUpgrade >= upgrades.Count ?
-                    weapons[potentialUpgrade - upgrades.Count].description :
-                    upgrades[potentialUpgrade].description;
+               
+
+                if(potentialUpgrade >= upgrades.Count)
+                {
+                    desc.description = weapons[potentialUpgrade - upgrades.Count].upgradeCount > 1 ?
+                        weapons[potentialUpgrade - upgrades.Count].upgradeDescription :
+                         weapons[potentialUpgrade - upgrades.Count].description;
+                }
+                else
+                {
+                    desc.description = upgrades[potentialUpgrade].description;
+                }
 
                 desc.icon = potentialUpgrade >= upgrades.Count ?
                     weapons[potentialUpgrade - upgrades.Count].icon :
                     upgrades[potentialUpgrade].icon;
 
                 desc.selectionEvent = () => { GainUpgrade(potentialUpgrade); };
-
+               
 
 
                 selections[i] = desc;
@@ -106,7 +115,7 @@ public class UpgradeManager : MonoBehaviour, IManager {
 
     private void Update()
     {
-        if (!GameplayManager.Get.runtimeActive) return;
+        if (!BackendManager.Get.runtimeActive) return;
 
 
         if (Input.GetKeyDown(KeyCode.Space))

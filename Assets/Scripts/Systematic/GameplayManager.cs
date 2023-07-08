@@ -1,55 +1,61 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GameplayManager {
+public class GameplayManager : MonoBehaviour, IManager {
 
-    static GameplayManager instance;
-
-    public static GameplayManager Get
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    public static void OnGlobalStart()
     {
-        get
-        {
-            if (instance == null)
-                instance = new GameplayManager();
+        GameObject manager = GameObject.Find("Systems") ?? new GameObject("Systems");
+        GameplayManager isValid = manager.GetComponent<GameplayManager>() ?? manager.AddComponent<GameplayManager>();
 
-            return instance;
-        }
+        Debug.Log($"{isValid.name} loaded!");
+
+        DontDestroyOnLoad(manager.gameObject);
+    }
+
+    PlayerController player;
 
 
+    public event Action onGameOverEvent;
+
+    public void OnLoad()
+    {
+        player = PollingStation.Get<PlayerController>();
     }
 
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    public static void GlobalStart()
+    public void Awake()
     {
-        PollingStation.Get<PlayerController>().StartCoroutine(Get.UpdateEvent());
+        player.SetActive(false);
+    }
+
+    public void SpawnPlayer()
+    {
+        player.SetActive(true);
+        player.transform.position = new Vector3(0.0f, 1.0f, 0.0f);
+    }
+
+    public void GameOver()
+    {
+        player.SetActive(false);
+
+        if (onGameOverEvent != null)
+            onGameOverEvent();
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
 
-    public bool runtimeActive = true;
-
-    private float _gameTime = 0;
 
 
-    public float gameTime
-    {
-        get
-        {
-            return _gameTime;
-        }
-    }
 
 
-    IEnumerator UpdateEvent()
-    {
-        while (true)
-        {
-            if (runtimeActive)
-            {
-                _gameTime += Time.deltaTime;
-            }
-            yield return null;
-        }
-    }
+
 }

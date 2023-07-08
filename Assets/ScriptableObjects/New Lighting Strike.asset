@@ -18,7 +18,9 @@ MonoBehaviour:
   additionalAttackDamage: 1
   additionalAttackSpeed: 0.01
   additionalAttackRange: 0.5
-  description: Conjur Lighting at random enemies
+  description: 'Lighting Strike: Conjur Lighting at random enemies'
+  upgradeDescription: 'Lighting Strike: Increase the number of strikes by 1. Increased
+    damage, fire rate and  detection range.'
   icon: {fileID: 0}
   upgradeCount: 1
   baseAmountOfLightingStrikes: 1

@@ -21,6 +21,7 @@ public abstract class BaseWeaponObject : ScriptableObject {
     public float additionalAttackRange;
     [Space]
     public string description;
+    public string upgradeDescription;
     public Sprite icon;
 
 

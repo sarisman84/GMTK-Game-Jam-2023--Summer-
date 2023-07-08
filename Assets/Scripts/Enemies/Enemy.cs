@@ -20,11 +20,13 @@ public class Enemy : Damagable {
     {
         controller = GetComponent<CharacterController>();
         target = PollingStation.Get<PlayerController>().transform;
+
+        PollingStation.Get<TeamsManager>().AddToTeam<Enemy>(gameObject);
     }
 
     public void FixedUpdate()
     {
-        if (!GameplayManager.Get.runtimeActive) return;
+        if (!BackendManager.Get.runtimeActive) return;
         if (!controller.isGrounded)
         {
             velocity += Physics.gravity * gravityScale * Time.fixedDeltaTime;
@@ -38,7 +40,7 @@ public class Enemy : Damagable {
 
     private void Update()
     {
-        if (!GameplayManager.Get.runtimeActive) return;
+        if (!BackendManager.Get.runtimeActive) return;
         if ((target.position - transform.position).sqrMagnitude < closeAttackRad * closeAttackRad)
         {//if the target is close enough
             Damagable other = target.GetComponent<Damagable>();

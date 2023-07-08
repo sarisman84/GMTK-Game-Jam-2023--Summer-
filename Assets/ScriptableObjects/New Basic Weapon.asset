@@ -19,6 +19,7 @@ MonoBehaviour:
   additionalAttackSpeed: 0.1
   additionalAttackRange: 1
   description: 'Swipe: Slash through enemies'
+  upgradeDescription: 'Swipe: Increased damage, fire rate and fire range.'
   icon: {fileID: 0}
   upgradeCount: 2
   detectionAngle: 80

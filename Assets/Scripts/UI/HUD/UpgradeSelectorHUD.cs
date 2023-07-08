@@ -23,10 +23,6 @@ public class UpgradeSelectorHUD : MonoBehaviour, IManager {
         public Action selectionEvent;
     }
 
-    enum FadeMode {
-        In, Out
-    }
-
 
     private List<Selection> selectionButtons;
     private CanvasGroup alphaHandler;
@@ -36,6 +32,12 @@ public class UpgradeSelectorHUD : MonoBehaviour, IManager {
         FetchSelectionButtons();
         alphaHandler = GetComponentInChildren<CanvasGroup>();
 
+        alphaHandler.alpha = 0;
+    }
+
+    private void OnValidate()
+    {
+        alphaHandler = alphaHandler ?? GetComponentInChildren<CanvasGroup>();
         alphaHandler.alpha = 0;
     }
 
@@ -66,7 +68,7 @@ public class UpgradeSelectorHUD : MonoBehaviour, IManager {
 
     public void SetSelections(SelectionDesc[] someDescriptions)
     {
-        StartCoroutine(FadeCoroutine(FadeMode.In));
+        StartCoroutine(Transition(FadeMode.In));
         for (int i = 0; i < someDescriptions.Length; i++)
         {
             var selection = selectionButtons[i];
@@ -78,7 +80,7 @@ public class UpgradeSelectorHUD : MonoBehaviour, IManager {
             selection.button.onClick.AddListener(() =>
             {
                 selectionEvent();
-                StartCoroutine(FadeCoroutine(FadeMode.Out));
+                StartCoroutine(Transition(FadeMode.Out));
             });
 
 
@@ -88,36 +90,18 @@ public class UpgradeSelectorHUD : MonoBehaviour, IManager {
         }
     }
 
-    private IEnumerator FadeCoroutine(FadeMode aMode)
+    IEnumerator Transition(FadeMode aMode)
     {
-        if(aMode == FadeMode.Out)
+        if (aMode == FadeMode.Out)
         {
             foreach (var item in selectionButtons)
             {
                 item.button.onClick.RemoveAllListeners();
             }
         }
+        yield return UIManager.FadeCoroutine(alphaHandler, aMode, fadeOutDuration, fadeInDuration);
 
-
-        float elapsed = 0.0f;
-
-        while (aMode == FadeMode.Out ? (elapsed < fadeOutDuration) : (elapsed < fadeInDuration))
-        {
-            float alpha = Mathf.Lerp(
-                aMode == FadeMode.Out ? 1.0f : 0.0f,
-                aMode == FadeMode.Out ? 0.0f : 1.0f,
-                aMode == FadeMode.Out ? (elapsed / fadeOutDuration) : (elapsed / fadeInDuration));
-
-            alphaHandler.alpha = alpha;
-
-            elapsed += Time.deltaTime;
-
-            yield return null;
-        }
-
-        alphaHandler.alpha = aMode == FadeMode.Out ? 0.0f : 1.0f;
-
-        GameplayManager.Get.runtimeActive = aMode == FadeMode.Out;
+        BackendManager.Get.runtimeActive = aMode == FadeMode.Out;
 
     }
 

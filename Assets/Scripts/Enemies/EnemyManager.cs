@@ -26,9 +26,9 @@ public class EnemyManager : MonoBehaviour, IManager
 
     void Update()
     {
-        if (!GameplayManager.Get.runtimeActive) return;
+        if (!BackendManager.Get.runtimeActive) return;
 
-        float currentTime = GameplayManager.Get.gameTime;
+        float currentTime = BackendManager.Get.gameTime;
         float lastTime = currentTime - Time.deltaTime;
         foreach(EnemySpawnTracker spawner in spawners) {
             spawner.Update(currentTime);
