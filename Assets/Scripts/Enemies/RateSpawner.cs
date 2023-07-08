@@ -1,24 +1,39 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class RateSpawner : ScriptableObject
 {
+    public enum ContinuationBehaviour { CurveInternal, CurveLinear, ScaledInternal, ScaledLinear }
+    public enum DiviationType { None, Constant, Normal }
+
+
     [SerializeField]
     private GameObject prefab;
     [SerializeField]
     private AnimationCurve spawnRate;//its probability density, because we integrate over it to get the actual probability
 
-    public enum DiviationType { None, Constant, Normal }
+    [Space]
+    [SerializeField]
+    private ContinuationBehaviour continuationBehaviour;
+    public float scalePerSecond = 1;
+
+    [Space]
     public DiviationType diviationType;
     public float diviation;
+
 
     #region SpawnCount Calculation
     private float GetDensityVal(float time) {
         ref Keyframe key = ref spawnRate.keys[spawnRate.length - 1];
         if (time > key.time)
-            return key.value + key.outTangent * (time - key.time);//linearly extrapolate the probability
+            switch (continuationBehaviour) {
+                case ContinuationBehaviour.CurveInternal:  return spawnRate.Evaluate(time);                                     //use the internal extrapolation
+                case ContinuationBehaviour.CurveLinear:    return key.value +                key.outTangent * (time - key.time);//linearly extrapolate the probability with the last tangent slope
+                case ContinuationBehaviour.ScaledInternal: return spawnRate.Evaluate(time) * scalePerSecond * (time - key.time);//use the internal extrapolation, but scale it linearly with time
+                case ContinuationBehaviour.ScaledLinear:   return key.value +                scalePerSecond * (time - key.time);//linearly extrapolate the probability with scale factor
+            }
+            
         return spawnRate.Evaluate(time);
     }
 

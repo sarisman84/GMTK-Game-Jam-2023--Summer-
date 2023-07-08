@@ -26,17 +26,19 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 20.000484
-      value: 16.31831
-      inSlope: 2.2728446
-      outSlope: 2.2728446
+      time: 15
+      value: 5.0236983
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.04983409
+      inWeight: 0.13749123
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PostInfinity: 0
     m_RotationOrder: 4
+  continuationBehaviour: 2
+  scalePerSecond: 0.1
   diviationType: 0
   diviation: 0
   spawnHeight: 2
