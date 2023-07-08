@@ -35,7 +35,7 @@ public class Enemy : Damagable {
         }
     }
 
-    public virtual void Update()
+    private void Update()
     {
         if (!GameplayManager.Get.runtimeActive) return;
         if ((target.position - transform.position).sqrMagnitude < closeAttackRad * closeAttackRad)
@@ -46,7 +46,11 @@ public class Enemy : Damagable {
         }
 
         closeAttackTime += Time.deltaTime;
+
+        OnUpdate();
     }
+
+    public virtual void OnUpdate() {}
 
     public virtual bool CloseAttack(Damagable other)
     {

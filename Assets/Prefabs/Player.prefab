@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4083748113534913146}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalRotation: {x: 0.6427876, y: 0, z: 0, w: 0.7660445}
+  m_LocalPosition: {x: 0, y: 10, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3338455903987530129}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
 --- !u!20 &2613520979805563300
 Camera:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90.7
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -105,6 +105,8 @@ GameObject:
   - component: {fileID: 8878300167834213033}
   - component: {fileID: 3108556754879320710}
   - component: {fileID: 1364464904711437151}
+  - component: {fileID: 8610983769109658865}
+  - component: {fileID: 8833383806939128152}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -211,7 +213,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce37d151746548e4f96f5fa28094a4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
-  attackSpeed: 1
-  maxHealth: 1
-  invurnabilityDurationOnDamageTakenInSeconds: 1
+  maxHealth: 100
+  health: 0
+  showDebug: 1
+  baseMovementSpeed: 3
+  movementSpeed: 10
+  invurnabilityDurationInSeconds: 0.5
+--- !u!114 &8610983769109658865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6950201799653576459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef8f6727d277b041ae8c43d426656d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgrades:
+  - {fileID: 11400000, guid: de9a63c000f4e764fa63fe6e9f3671b5, type: 2}
+  weapons:
+  - {fileID: 11400000, guid: 23af239286e3b2b4d879621b7df6cc29, type: 2}
+  experienceRequiredToLevelUp: 100
+  currentUpgrades: 
+--- !u!143 &8833383806939128152
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6950201799653576459}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 100
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}

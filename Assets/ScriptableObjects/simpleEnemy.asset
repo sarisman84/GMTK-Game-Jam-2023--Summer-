@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5768830fa85e047a7fc313d838532d, type: 3}
+  m_Name: simpleEnemy
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8190690362109376037, guid: 54cd75bf9f9511e4ba93e5edd29cea91, type: 3}
+  spawnRate:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 20.000484
+      value: 16.31831
+      inSlope: 2.2728446
+      outSlope: 2.2728446
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.04983409
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  diviationType: 0
+  diviation: 0
+  spawnHeight: 2
+  sizeRad: 1

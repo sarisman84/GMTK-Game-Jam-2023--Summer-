@@ -44,10 +44,20 @@ public class PollingStation
         }
     }
 
-
+#if UNITY_EDITOR
+    public static T Get<T>() where T : MonoBehaviour, IManager {
+        if (UnityEditor.EditorApplication.isPlaying) {
+            return (T)Get()?.managers[typeof(T)];
+        }
+        else {
+            return Object.FindObjectOfType<T>();//this is only for edit mode (slow)
+        }
+    }
+#else
     public static T Get<T>() where T : MonoBehaviour, IManager {
         return (T)Get()?.managers[typeof(T)];
     }
+#endif
 
     /*
     private void OnApplicationQuit() {
