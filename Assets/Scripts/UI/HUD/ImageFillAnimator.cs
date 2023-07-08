@@ -13,7 +13,7 @@ public class ImageFillAnimator : MonoBehaviour
     }
 
     private void Update() {
-        if (!GameplayManager.Get.runtimeActive) return;
+        if (!BackendManager.Get.runtimeActive) return;
         if (currentTime <= 0) return;
         currentTime -= Time.deltaTime;
         currentTime = Mathf.Max(currentTime, 0);
