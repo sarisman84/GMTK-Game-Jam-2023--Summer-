@@ -153,6 +153,8 @@ public abstract class BaseWeaponObject : ScriptableObject {
         {
             currentAttackRate = 0;
             OnUpdateWeapon(aManager);
+            Debug.LogWarning("start cooldown");
+            PollingStation.Get<WeaponHUD>().StartCooldown(this, attackSpeed);
         }
        
     }

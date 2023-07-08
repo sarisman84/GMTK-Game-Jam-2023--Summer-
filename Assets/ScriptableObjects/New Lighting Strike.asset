@@ -21,7 +21,7 @@ MonoBehaviour:
   description: 'Lighting Strike: Conjur Lighting at random enemies'
   upgradeDescription: 'Lighting Strike: Increase the number of strikes by 1. Increased
     damage, fire rate and  detection range.'
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c11af498873c3c5458ff6f2131980a95, type: 3}
   upgradeCount: 1
   baseAmountOfLightingStrikes: 1
   additionalAmountOfLightingStrikes: 1

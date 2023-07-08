@@ -45,6 +45,15 @@ public class EnemyManager : MonoBehaviour, IManager
         }
     }
 
+    void Clear() {
+        if (GetParent() != null)
+            Destroy(GetParent());
+
+        foreach (EnemySpawnTracker spawner in spawners) {
+            spawner.Reset();
+        }
+    }
+
     public Vector3 getSpawnPos(float radOffset = 0, float height = 0, int recursionCount = 0) {
         if (recursionCount > maxSpawnTries) return Vector3.positiveInfinity;
 

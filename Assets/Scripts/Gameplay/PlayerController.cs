@@ -66,7 +66,7 @@ public class PlayerController : Damagable, IManager {
             base.Hit(damage, attacker);
             hasBeenHit = true;
         }
-
+        PollingStation.Get<HealthBar>().SetHealthPercent(health / maxHealth);
     }
 
     public override void OnDeath(MonoBehaviour attacker)

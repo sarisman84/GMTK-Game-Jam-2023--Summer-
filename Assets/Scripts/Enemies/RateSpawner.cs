@@ -103,4 +103,10 @@ public class RateSpawnTracker {
         spawnedCount++;
         return spawner.Spawn(pos, parent);
     }
+
+    public void Reset() {
+        spawnedCount = 0;
+        currentIntegralVal = 0;
+        lastTime = 0;
+    }
 }
