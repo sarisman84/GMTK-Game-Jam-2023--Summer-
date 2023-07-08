@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour, IManager
@@ -9,8 +10,6 @@ public class EnemyManager : MonoBehaviour, IManager
     [SerializeField]
     private List<EnemySpawner> spawns = new List<EnemySpawner>();
     private List<EnemySpawnTracker> spawners;
-
-    public List<Enemy> enemyPool { get; set; } = new List<Enemy>();
 
     private Vector3 playerPos => PollingStation.Get<PlayerController>().transform.position;
 
@@ -42,7 +41,6 @@ public class EnemyManager : MonoBehaviour, IManager
                     continue;
                 }
                 Enemy e = spawner.Spawn(pos, GetParent());
-                enemyPool.Add(e);
             }
         }
     }
@@ -71,14 +69,7 @@ public class EnemyManager : MonoBehaviour, IManager
     }
 
     public void OnDrawGizmosSelected() {
-        Gizmos.color = Color.cyan;
-        Matrix4x4 mat = Gizmos.matrix;
-        Matrix4x4 flat = mat;
-        flat.SetTRS(mat.GetPosition() + playerPos, 
-                    mat.rotation, 
-                    new Vector3(mat.lossyScale.x, 0, mat.lossyScale.z));
-        Gizmos.matrix = flat;
-        Gizmos.DrawWireSphere(Vector3.zero, spawnRad);
-        Gizmos.matrix = mat;
+        Handles.color = Color.cyan;
+        Handles.DrawWireDisc(Vector3.zero, Vector3.up, spawnRad);
     }
 }
