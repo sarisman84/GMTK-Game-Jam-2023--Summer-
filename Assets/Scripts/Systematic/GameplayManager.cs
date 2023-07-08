@@ -47,7 +47,6 @@ public class GameplayManager {
         {
             if (runtimeActive)
             {
-                Debug.Log(_gameTime);
                 _gameTime += Time.deltaTime;
             }
             yield return null;

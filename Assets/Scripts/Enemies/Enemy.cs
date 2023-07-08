@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Enemy : Damagable {
     [HideInInspector] public Vector3 velocity;
+    public float gravityScale = 1.0f;
 
     [HideInInspector] public Transform target;
     public CharacterController controller { get; private set; }
@@ -26,7 +27,7 @@ public class Enemy : Damagable {
         if (!GameplayManager.Get.runtimeActive) return;
         if (!controller.isGrounded)
         {
-            velocity += Physics.gravity * Time.fixedDeltaTime;
+            velocity += Physics.gravity * gravityScale * Time.fixedDeltaTime;
             controller.Move(velocity * Time.fixedDeltaTime);
         }
         else

@@ -4,13 +4,13 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour, IManager
 {
     public float spawnRad = 5;
-    public int maxSpawnTries;
+    public int maxSpawnTries = 5;
 
     [SerializeField]
     private List<EnemySpawner> spawns = new List<EnemySpawner>();
     private List<EnemySpawnTracker> spawners;
 
-    public List<Enemy> enemyPool { get; set; }
+    public List<Enemy> enemyPool { get; set; } = new List<Enemy>();
 
     private Vector3 playerPos => PollingStation.Get<PlayerController>().transform.position;
 
@@ -27,7 +27,9 @@ public class EnemyManager : MonoBehaviour, IManager
 
     void Update()
     {
-        float currentTime = Time.time;//TODO: use the current gameloop time instead
+        if (!GameplayManager.Get.runtimeActive) return;
+
+        float currentTime = GameplayManager.Get.gameTime;
         float lastTime = currentTime - Time.deltaTime;
         foreach(EnemySpawnTracker spawner in spawners) {
             spawner.Update(currentTime);
@@ -39,7 +41,7 @@ public class EnemyManager : MonoBehaviour, IManager
                     Debug.LogWarning("could not find a spawning position");
                     continue;
                 }
-                Enemy e = spawner.Spawn(pos, GetParent()).GetComponent<Enemy>();
+                Enemy e = spawner.Spawn(pos, GetParent());
                 enemyPool.Add(e);
             }
         }
