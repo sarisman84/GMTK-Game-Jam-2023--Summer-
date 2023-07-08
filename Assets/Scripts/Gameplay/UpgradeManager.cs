@@ -74,6 +74,8 @@ public class UpgradeManager : MonoBehaviour, IManager {
 
             upgradeSelector.SetSelections(selections);
         }
+
+        PollingStation.Get<VialHUD>().SetVialFill(currentExperience / experienceRequiredToLevelUp);
     }
 
     public void GainUpgrade(int anUpgrade)

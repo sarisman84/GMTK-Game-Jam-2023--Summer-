@@ -30,17 +30,18 @@ public class PlayerController : Damagable, IManager {
 
     //public List<BaseWeaponUpgrade> activeWeapons;
 
-    private void Awake()
-    {
+    public void OnLoad() {
         meshFilter = GetComponentInChildren<MeshFilter>();
         movementSpeed = baseMovementSpeed;
         upgradeManager = GetComponent<UpgradeManager>();
         controller = GetComponent<CharacterController>() != null ? GetComponent<CharacterController>() : gameObject.AddComponent<CharacterController>();
 
-       
         mainCamera = Camera.main;
+    }
 
 
+    private void Awake()
+    {
         PollingStation.Get<TeamsManager>().AddToTeam<PlayerController>(gameObject);
     }
 
@@ -95,11 +96,6 @@ public class PlayerController : Damagable, IManager {
         UpdateInvurnabilityTimer();
         Movement();
         //Attack();
-    }
-
-    public void OnLoad()
-    {
-
     }
 
 

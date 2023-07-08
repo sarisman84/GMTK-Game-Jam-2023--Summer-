@@ -3,7 +3,8 @@ Shader "Unlit/FluidBar"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Cutoff ("Alpha Cutoff", Float) = 0.1
+        _Cutoff ("Alpha Cutoff", Range(0.0, 1.0)) = 0.1
+        _AlphaFalloff ("Alpha Falloff", Range(0.0, 0.05)) = 0.01
 
         _Fill ("Filling status", Range(0.0, 1.0)) = 0.5
         _Amp ("Wave Amplitude", Range(0.0, 0.1)) = 0.1
@@ -19,14 +20,16 @@ Shader "Unlit/FluidBar"
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" }
+        Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
+        ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
         LOD 100
 
         Pass
         {
             CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
+            #pragma vertex vert alpha
+            #pragma fragment frag alpha
 
             #include "UnityCG.cginc"
 
@@ -45,6 +48,7 @@ Shader "Unlit/FluidBar"
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float _Cutoff;
+            float _AlphaFalloff;
 
             float _Fill;
             float _Amp;
@@ -84,8 +88,9 @@ Shader "Unlit/FluidBar"
                     wavelen *= _layerWavelenScale;
                 }
                 clip(-wavePos);
+                col.a *= saturate(-wavePos / _AlphaFalloff);
 
-                return col;
+                return float4(col.rgb, col.a);
             }
             ENDCG
         }

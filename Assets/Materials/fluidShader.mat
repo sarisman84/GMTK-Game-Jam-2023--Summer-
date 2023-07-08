@@ -61,12 +61,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaFalloff: 0.0112
     - _Amp: 0.0056
     - _BumpScale: 1
-    - _Cutoff: 0.5
+    - _Cutoff: 0.03
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Fill: 0.439
+    - _Fill: 0.3
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -80,7 +81,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _Wavelen: 4.05
-    - _XScale: 4
+    - _XScale: 1
     - _ZWrite: 1
     - _layerAmpScale: 0.91
     - _layerCount: 5
