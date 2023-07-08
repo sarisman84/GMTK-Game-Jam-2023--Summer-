@@ -229,27 +229,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &329202207 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6950201799653576459, guid: c89d52d555d9da1448d026c8ce993a76, type: 3}
-  m_PrefabInstance: {fileID: 1596053679}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &329202213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329202207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ef8f6727d277b041ae8c43d426656d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgrades: []
-  weapons: []
-  experienceRequiredToLevelUp: 0
-  currentUpgrades: 
 --- !u!1 &640448624
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,10 +587,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6950201799653576459, guid: c89d52d555d9da1448d026c8ce993a76, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 329202213}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c89d52d555d9da1448d026c8ce993a76, type: 3}
 --- !u!1 &1762114621
 GameObject:

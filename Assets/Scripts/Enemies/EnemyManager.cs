@@ -35,7 +35,11 @@ public class EnemyManager : MonoBehaviour, IManager
             int count = spawner.GetSpawnCount();
             for (int i = 0; i < count; i++) {
                 Vector3 pos = getSpawnPos(spawner.spawner.sizeRad, spawner.spawner.spawnHeight);
-                Enemy e = spawner.Spawn(pos).GetComponent<Enemy>();
+                if (pos.x == float.PositiveInfinity) {
+                    Debug.LogWarning("could not find a spawning position");
+                    continue;
+                }
+                Enemy e = spawner.Spawn(pos, GetParent()).GetComponent<Enemy>();
                 enemyPool.Add(e);
             }
         }
@@ -55,6 +59,13 @@ public class EnemyManager : MonoBehaviour, IManager
         pos.y = hit.point.y + height;//set the y position to the y-pos, above floor height
 
         return pos;
+    }
+
+    private static Transform parent;
+    public Transform GetParent() {
+        if(parent == null)
+            parent = new GameObject("Enemy Parent").transform;
+        return parent;
     }
 
     public void OnDrawGizmosSelected() {
