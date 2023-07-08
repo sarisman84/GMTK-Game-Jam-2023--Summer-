@@ -15,6 +15,7 @@ public class PlayerController : Damagable, IManager {
     private CharacterController controller;
     private Vector3 currentMovement;
     private MeshFilter meshFilter;
+    private Camera mainCamera;
 
     public float invurnabilityDurationInSeconds = 0.5f;
     private float currentInvurnabilityDuration = 0.0f;
@@ -25,13 +26,14 @@ public class PlayerController : Damagable, IManager {
 
     private void Awake()
     {
-        meshFilter = GetComponent<MeshFilter>();
+        meshFilter = GetComponentInChildren<MeshFilter>();
         movementSpeed = baseMovementSpeed;
         upgradeManager = GetComponent<UpgradeManager>();
         controller = GetComponent<CharacterController>() != null ? GetComponent<CharacterController>() : gameObject.AddComponent<CharacterController>();
 
         //Start with a basic weapon
         upgradeManager.GainWeapon(0);
+        mainCamera = Camera.main;
     }
 
     private void Movement()
@@ -41,8 +43,8 @@ public class PlayerController : Damagable, IManager {
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input.Normalize();
 
-        currentMovement.x = input.x * movementSpeed * Time.deltaTime;
-        currentMovement.z = input.y * movementSpeed * Time.deltaTime;
+        currentMovement = (mainCamera.transform.right * input.x + mainCamera.transform.forward * input.y) * movementSpeed * Time.deltaTime;
+        currentMovement.y = 0;
         controller.Move(currentMovement);
 
         transform.position = new Vector3(transform.position.x, 1, transform.position.z);

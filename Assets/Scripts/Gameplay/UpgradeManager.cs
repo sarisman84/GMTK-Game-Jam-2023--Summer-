@@ -18,13 +18,18 @@ public class UpgradeManager : MonoBehaviour, IManager {
 
     [HideInInspector] public List<int> currentUpgrades;
 
-    private PlayerController player;
+    private PlayerController _player;
     private UpgradeSelectorHUD upgradeSelector;
+
+    public PlayerController player
+    {
+        get { return _player; }
+    }
 
 
     private void Awake()
     {
-        player = GetComponent<PlayerController>();
+        _player = GetComponent<PlayerController>();
         upgradeSelector = PollingStation.Get<UpgradeSelectorHUD>();
     }
     public void AddExperience(float someExperience)
@@ -77,14 +82,16 @@ public class UpgradeManager : MonoBehaviour, IManager {
         if (selectedUpgrade < upgrades.Count)
         {
             upgrades[selectedUpgrade].upgradeCount = currentUpgrades[selectedUpgrade];
-            upgrades[selectedUpgrade].OnUpdate(player);
+            upgrades[selectedUpgrade].OnUpdate(_player);
 
             Debug.Log($"Gained Upgrade: {upgrades[selectedUpgrade].GetType().Name}");
         }
         else
         {
             weapons[selectedUpgrade - upgrades.Count].upgradeCount = currentUpgrades[selectedUpgrade];
-            PollingStation.Get<GizmoDrawer>().gizmoDraw = () => { weapons[selectedUpgrade - upgrades.Count].OnDrawGizmo(player); };
+            weapons[selectedUpgrade - upgrades.Count].OnUpgrade();
+
+            PollingStation.Get<GizmoDrawer>().gizmoDraw = () => { weapons[selectedUpgrade - upgrades.Count].OnDrawGizmo(_player); };
 
             Debug.Log($"{(currentUpgrades[selectedUpgrade] > 1 ? "Upgraded" : "Gained")} Weapon: {weapons[selectedUpgrade - upgrades.Count].GetType().Name}");
         }
@@ -111,7 +118,7 @@ public class UpgradeManager : MonoBehaviour, IManager {
         for (int i = upgrades.Count; i < currentUpgrades.Count; i++)
         {
             if (currentUpgrades[i] >= 1)
-                weapons[i - upgrades.Count].OnUpdate(player);
+                weapons[i - upgrades.Count].OnUpdate(_player);
         }
     }
 

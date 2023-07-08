@@ -2364,6 +2364,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2613520979805563300, guid: c89d52d555d9da1448d026c8ce993a76, type: 3}
+      propertyPath: orthographic size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3338455903987530129, guid: c89d52d555d9da1448d026c8ce993a76, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2432,6 +2436,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4717832207790233124, guid: c89d52d555d9da1448d026c8ce993a76, type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 23af239286e3b2b4d879621b7df6cc29, type: 2}
+    - target: {fileID: 4717832207790233124, guid: c89d52d555d9da1448d026c8ce993a76, type: 3}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c876e70043886de4c957e19592dbfef0, type: 2}
     - target: {fileID: 5438671320511380243, guid: c89d52d555d9da1448d026c8ce993a76, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
