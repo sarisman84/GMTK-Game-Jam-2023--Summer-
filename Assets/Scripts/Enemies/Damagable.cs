@@ -4,7 +4,7 @@ public class Damagable : MonoBehaviour
 {
     public float maxHealth = 100.0f;
     public float health;
-    public float amountOfDroppedExperience = 0;
+  
 
     void Start()
     {
@@ -22,10 +22,11 @@ public class Damagable : MonoBehaviour
 
         if (health == 0.0f)
             OnDeath(attacker);
+
+        Debug.Log($"{gameObject.name} took {damage} damage!");
     }
 
     public virtual void OnDeath(MonoBehaviour attacker) {
-        Destroy(gameObject);
-        PollingStation.Get<UpgradeManager>().AddExperience(amountOfDroppedExperience);
+
     }
 }

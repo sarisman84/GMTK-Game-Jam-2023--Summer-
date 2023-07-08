@@ -13,7 +13,7 @@ public class BaseWeapon : BaseWeaponObject {
             if(damagable != null)
             {
                 damagable.Hit(attackDamage, aController);
-                Debug.Log($"Attacking {damagable.gameObject.name}![Remaining health: {damagable.health}]");
+                //Debug.Log($"Attacking {damagable.gameObject.name}![Remaining health: {damagable.health}]");
             }
       
         }

@@ -19,11 +19,13 @@ public class UpgradeManager : MonoBehaviour, IManager {
     [HideInInspector] public List<int> currentUpgrades;
 
     private PlayerController player;
+    private UpgradeSelectorHUD upgradeSelector;
 
 
     private void Awake()
     {
         player = GetComponent<PlayerController>();
+        upgradeSelector = PollingStation.Get<UpgradeSelectorHUD>();
     }
     public void AddExperience(float someExperience)
     {
@@ -36,7 +38,29 @@ public class UpgradeManager : MonoBehaviour, IManager {
             currentLevel++;
             currentExperience = 0;
 
-            GainUpgrade();
+            UpgradeSelectorHUD.SelectionDesc[] selections = new UpgradeSelectorHUD.SelectionDesc[3];
+            for (int i = 0; i < selections.Length; i++)
+            {
+                int potentialUpgrade = Random.Range(0, upgrades.Count + weapons.Count);
+
+                UpgradeSelectorHUD.SelectionDesc desc = new UpgradeSelectorHUD.SelectionDesc();
+
+                desc.description = potentialUpgrade >= upgrades.Count ?
+                    weapons[potentialUpgrade - upgrades.Count].description :
+                    upgrades[potentialUpgrade].description;
+
+                desc.icon = potentialUpgrade >= upgrades.Count ?
+                    weapons[potentialUpgrade - upgrades.Count].icon :
+                    upgrades[potentialUpgrade].icon;
+
+                desc.selectionEvent = () => { GainUpgrade(potentialUpgrade); };
+
+
+
+                selections[i] = desc;
+            }
+
+            upgradeSelector.SetSelections(selections);
         }
     }
 
@@ -72,13 +96,10 @@ public class UpgradeManager : MonoBehaviour, IManager {
         GainUpgrade(aWeapon + upgrades.Count);
     }
 
-    public void GainUpgrade()
-    {
-        GainUpgrade(Random.Range(0, upgrades.Count + weapons.Count));
-    }
-
     private void Update()
     {
+        if (!GameplayManager.Get.runtimeActive) return;
+
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

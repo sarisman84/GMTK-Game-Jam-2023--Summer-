@@ -6,7 +6,7 @@ public class BasicEnemy : Damagable
 {
     public float movementSpeed;
     public float attackSpeed;
-
+    public float amountOfDroppedExperience = 0;
     private Vector3 currentMovement;
 
     private CharacterController controller;
@@ -29,7 +29,7 @@ public class BasicEnemy : Damagable
     private void Update()
     {
         if (player == null) return;
-
+        if (!GameplayManager.Get.runtimeActive) return;
 
         Vector3 dirToPlayer = player.transform.position - transform.position;
         dirToPlayer.Normalize();
@@ -40,5 +40,11 @@ public class BasicEnemy : Damagable
         controller.Move(currentMovement);
 
         transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+    }
+
+    public override void OnDeath(MonoBehaviour attacker)
+    {
+        Destroy(gameObject);
+        PollingStation.Get<UpgradeManager>().AddExperience(amountOfDroppedExperience);
     }
 }

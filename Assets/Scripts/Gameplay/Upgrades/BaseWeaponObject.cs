@@ -11,6 +11,10 @@ public abstract class BaseWeaponObject : ScriptableObject {
     public float additionalAttackDamage;
     public float additionalAttackSpeed;
     public float additionalAttackRange;
+    [Space]
+    public string description;
+    public Sprite icon;
+
 
     [HideInInspector] public int upgradeCount;
 

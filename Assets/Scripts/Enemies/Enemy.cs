@@ -1,45 +1,55 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class Enemy : Damagable
-{
-    public Vector3 velocity;
+public class Enemy : Damagable {
+    [HideInInspector] public Vector3 velocity;
 
-    public Transform target;
+    [HideInInspector] public Transform target;
     public CharacterController controller { get; private set; }
 
-
+    public float amountOfDroppedExperience = 0;
     public float closeAttackDamage = 10.0f;
     public float closeAttackRad = 2.0f;
     public float closeAttackCooldown = 0.5f;
     private float closeAttackTime = 0.0f;
 
-    private void Awake() {
+
+
+    private void Awake()
+    {
         controller = GetComponent<CharacterController>();
         target = PollingStation.Get<PlayerController>().transform;
     }
 
-    public void FixedUpdate() {
-        if (!controller.isGrounded) {
+    public void FixedUpdate()
+    {
+        if (!GameplayManager.Get.runtimeActive) return;
+        if (!controller.isGrounded)
+        {
             velocity += Physics.gravity * Time.fixedDeltaTime;
             controller.Move(velocity * Time.fixedDeltaTime);
         }
-        else {
+        else
+        {
             velocity.y = 0;
         }
     }
 
-    public virtual void Update() {
-        if ((target.position - transform.position).sqrMagnitude < closeAttackRad*closeAttackRad) {//if the target is close enough
+    public virtual void Update()
+    {
+        if (!GameplayManager.Get.runtimeActive) return;
+        if ((target.position - transform.position).sqrMagnitude < closeAttackRad * closeAttackRad)
+        {//if the target is close enough
             Damagable other = target.GetComponent<Damagable>();
-            if(other != null)
+            if (other != null)
                 CloseAttack(other);
         }
 
         closeAttackTime += Time.deltaTime;
     }
 
-    public virtual bool CloseAttack(Damagable other) {
+    public virtual bool CloseAttack(Damagable other)
+    {
         if (closeAttackTime < closeAttackCooldown) return false;
 
         other.Hit(closeAttackDamage, this);
@@ -47,8 +57,15 @@ public class Enemy : Damagable
         return true;
     }
 
+    public override void OnDeath(MonoBehaviour attacker)
+    {
+        Destroy(gameObject);
+        PollingStation.Get<UpgradeManager>().AddExperience(amountOfDroppedExperience);
+    }
 
-    public void OnDrawGizmosSelected() {
+
+    public void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, closeAttackRad);
     }
