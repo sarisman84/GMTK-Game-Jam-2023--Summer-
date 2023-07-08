@@ -70,6 +70,6 @@ public class EnemyManager : MonoBehaviour, IManager
 
     public void OnDrawGizmosSelected() {
         Handles.color = Color.cyan;
-        Handles.DrawWireDisc(Vector3.zero, Vector3.up, spawnRad);
+        Handles.DrawWireDisc(playerPos, Vector3.up, spawnRad);
     }
 }

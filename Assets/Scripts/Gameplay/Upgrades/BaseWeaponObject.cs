@@ -52,7 +52,7 @@ public abstract class BaseWeaponObject : ScriptableObject {
 
     public static List<Damagable> GetAllDamagablesInAView(DetectionDesc aDescription)
     {
-        Collider[] foundColliders = Physics.OverlapSphere(aDescription.originPoint.transform.position, aDescription.detectionRadius*2);
+        Collider[] foundColliders = Physics.OverlapSphere(aDescription.originPoint.transform.position, aDescription.detectionRadius);
 
         if (foundColliders.Length == 0) return null;
 
