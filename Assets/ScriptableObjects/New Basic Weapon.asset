@@ -18,4 +18,6 @@ MonoBehaviour:
   additionalAttackDamage: 1
   additionalAttackSpeed: 0.1
   additionalAttackRange: 1
-  upgradeCount: 0
+  description: 'Swipe: Slash through enemies'
+  icon: {fileID: 0}
+  upgradeCount: 2

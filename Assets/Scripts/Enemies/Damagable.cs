@@ -23,7 +23,7 @@ public class Damagable : MonoBehaviour
         if (health == 0.0f)
             OnDeath(attacker);
 
-        Debug.Log($"{gameObject.name} took {damage} damage!");
+       // Debug.Log($"{gameObject.name} took {damage} damage!");
     }
 
     public virtual void OnDeath(MonoBehaviour attacker) {
