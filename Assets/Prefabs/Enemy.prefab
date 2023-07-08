@@ -126,8 +126,9 @@ MonoBehaviour:
   maxHealth: 1
   health: 0
   velocity: {x: 0, y: 0, z: 0}
+  gravityScale: 1
   target: {fileID: 0}
   amountOfDroppedExperience: 10
-  closeAttackDamage: 1
+  closeAttackDamage: 100
   closeAttackRad: 2
   closeAttackCooldown: 0.25

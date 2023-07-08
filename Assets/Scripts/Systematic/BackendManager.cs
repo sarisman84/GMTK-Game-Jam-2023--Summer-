@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class BackendManager {
 
@@ -27,7 +27,36 @@ public class BackendManager {
     }
 
 
-  
+    public static T CreateOrFetchManager<T>() where T : MonoBehaviour
+    {
+        GameObject manager = null;
+        var rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+
+        for (int i = 0; i < rootObjects.Length; i++)
+        {
+            if (rootObjects[i].CompareTag("Backend"))
+            {
+                manager = rootObjects[i];
+                break;
+            }
+
+
+        }
+
+        manager = new GameObject(typeof(T).Name);
+
+        T result = manager.GetComponent<T>();
+        if (result == null)
+        {
+            result = manager.AddComponent<T>();
+        }
+        return result;
+
+
+    }
+
+
+
 
 
     public bool runtimeActive = true;

@@ -10,26 +10,17 @@ public class GizmoDrawer : MonoBehaviour, IManager {
     {
         GameObject gizmoDrawer = new GameObject("Gizmo Drawer [DEBUG]");
         gizmoDrawer.AddComponent<GizmoDrawer>();
+
+        DontDestroyOnLoad(gizmoDrawer);
     }
 
-    List<System.Action> _gizmoDraw = new List<System.Action>();
-
-    public System.Action gizmoDraw
-    {
-        set
-        {
-            _gizmoDraw.Add(value);
-        }
-        private get { return _gizmoDraw[_gizmoDraw.Count - 1]; }
-    }
+    public event System.Action gizmoDraw;
 
 
     private void OnDrawGizmos()
     {
-        for (int i = 0; i < _gizmoDraw.Count; i++)
-        {
-            _gizmoDraw[i]();
-        }
+        if (gizmoDraw != null)
+            gizmoDraw();
     }
 
 

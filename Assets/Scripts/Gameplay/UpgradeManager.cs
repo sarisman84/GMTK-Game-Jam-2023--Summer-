@@ -16,8 +16,6 @@ public class UpgradeManager : MonoBehaviour, IManager {
 
     private bool hasAlreadyLoaded = false;
 
-    [HideInInspector] public List<int> currentUpgrades;
-
     private PlayerController _player;
     private UpgradeSelectorHUD upgradeSelector;
 
@@ -82,14 +80,9 @@ public class UpgradeManager : MonoBehaviour, IManager {
     {
         int selectedUpgrade = anUpgrade;
 
-
-        if (currentUpgrades.Count == 0)
-            OnLoad();
-
-        currentUpgrades[selectedUpgrade]++;
-
-        if (selectedUpgrade < upgrades.Count) {
-            upgrades[selectedUpgrade].upgradeCount = currentUpgrades[selectedUpgrade];
+        if (selectedUpgrade < upgrades.Count)
+        {
+            upgrades[selectedUpgrade].upgradeCount++;
             upgrades[selectedUpgrade].OnUpdate(_player);
 
             Debug.Log($"Gained Upgrade: {upgrades[selectedUpgrade].GetType().Name}");
@@ -126,10 +119,10 @@ public class UpgradeManager : MonoBehaviour, IManager {
             AddExperience(experienceRequiredToLevelUp);
         }
 
-        for (int i = upgrades.Count; i < currentUpgrades.Count; i++)
+        for (int i = 0; i < weapons.Count; i++)
         {
-            if (currentUpgrades[i] >= 1)
-                weapons[i - upgrades.Count].OnUpdate(this);
+            if (weapons[i].upgradeCount >= 1)
+                weapons[i].OnUpdate(this);
         }
     }
 
@@ -137,16 +130,20 @@ public class UpgradeManager : MonoBehaviour, IManager {
     {
         if (hasAlreadyLoaded) return;
 
-        for (int i = 0; i < upgrades.Count; i++)
-        {
-            currentUpgrades.Add(0);
-        }
-
-        for (int i = 0; i < weapons.Count; i++)
-        {
-            currentUpgrades.Add(0);
-        }
+        ResetUpgrades();
 
         hasAlreadyLoaded = true;
+    }
+
+    public void ResetUpgrades()
+    {
+        for (int i = 0; i < upgrades.Count; i++)
+        {
+            upgrades[i].upgradeCount = 0;
+        }
+        for (int i = 0; i < weapons.Count; i++)
+        {
+            weapons[i].upgradeCount = 0;
+        }
     }
 }

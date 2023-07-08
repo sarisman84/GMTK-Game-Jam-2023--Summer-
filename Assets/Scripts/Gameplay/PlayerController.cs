@@ -37,8 +37,7 @@ public class PlayerController : Damagable, IManager {
         upgradeManager = GetComponent<UpgradeManager>();
         controller = GetComponent<CharacterController>() != null ? GetComponent<CharacterController>() : gameObject.AddComponent<CharacterController>();
 
-        //Start with a basic weapon
-        upgradeManager.GainWeapon(0);
+       
         mainCamera = Camera.main;
 
 
@@ -71,7 +70,7 @@ public class PlayerController : Damagable, IManager {
 
     public override void OnDeath(MonoBehaviour attacker)
     {
-        gameObject.SetActive(false);
+        PollingStation.Get<GameplayManager>().GameOver();
     }
 
     private void UpdateInvurnabilityTimer()
@@ -120,5 +119,10 @@ public class PlayerController : Damagable, IManager {
     {
         BackendManager.Get.runtimeActive = aNewState;
         meshFilter.gameObject.SetActive(aNewState);
+        if (!aNewState)
+            upgradeManager.ResetUpgrades();
+        else
+            upgradeManager.GainWeapon(0);
+
     }
 }

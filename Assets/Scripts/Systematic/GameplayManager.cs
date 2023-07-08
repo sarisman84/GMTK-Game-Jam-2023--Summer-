@@ -9,12 +9,9 @@ public class GameplayManager : MonoBehaviour, IManager {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void OnGlobalStart()
     {
-        GameObject manager = GameObject.Find("Systems") ?? new GameObject("Systems");
-        GameplayManager isValid = manager.GetComponent<GameplayManager>() ?? manager.AddComponent<GameplayManager>();
+        GameObject go = BackendManager.CreateOrFetchManager<GameplayManager>().gameObject;
 
-        Debug.Log($"{isValid.name} loaded!");
-
-        DontDestroyOnLoad(manager.gameObject);
+        DontDestroyOnLoad(go);
     }
 
     PlayerController player;
@@ -24,12 +21,13 @@ public class GameplayManager : MonoBehaviour, IManager {
 
     public void OnLoad()
     {
-        player = PollingStation.Get<PlayerController>();
+        
     }
 
 
-    public void Awake()
+    public void Start()
     {
+        player = PollingStation.Get<PlayerController>();
         player.SetActive(false);
     }
 

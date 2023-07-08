@@ -7,12 +7,9 @@ public class TeamsManager : MonoBehaviour, IManager {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void OnGlobalStart()
     {
-        GameObject manager = GameObject.Find("Systems") ?? new GameObject("Systems");
-        TeamsManager isValid = manager.GetComponent<TeamsManager>() ?? manager.AddComponent<TeamsManager>();
+        GameObject go = BackendManager.CreateOrFetchManager<TeamsManager>().gameObject;
 
-        Debug.Log($"{isValid.name} loaded!");
-
-        DontDestroyOnLoad(manager.gameObject);
+        DontDestroyOnLoad(go);
     }
     public void OnLoad()
     {
