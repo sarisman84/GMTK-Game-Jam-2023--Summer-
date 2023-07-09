@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,13 +21,13 @@ public class UIManager : MonoBehaviour, IManager {
     void Start()
     {
         PollingStation.Get<GameplayManager>().onGameOverEvent += () => { onGameOver.Invoke(); };
+        PollingStation.Get<GameplayManager>().onGameStartEvent += () => { onGameStart.Invoke(); };
         onRuntimeInit.Invoke();
     }
 
     public void StartGame()
     {
-        PollingStation.Get<GameplayManager>().SpawnPlayer();
-        onGameStart.Invoke();
+        PollingStation.Get<GameplayManager>().GameStart();
         PollingStation.Get<AudioManager>().Play("ingamemusic");
     }
 

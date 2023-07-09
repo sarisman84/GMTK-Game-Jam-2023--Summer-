@@ -47,8 +47,6 @@ public class PlayerController : Damagable, IManager {
 
     private void Movement()
     {
-
-
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input.Normalize();
 

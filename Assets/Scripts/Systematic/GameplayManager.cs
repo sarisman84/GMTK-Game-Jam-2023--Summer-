@@ -16,7 +16,7 @@ public class GameplayManager : MonoBehaviour, IManager {
 
     PlayerController player;
 
-
+    public event Action onGameStartEvent;
     public event Action onGameOverEvent;
 
     public void OnLoad()
@@ -35,6 +35,11 @@ public class GameplayManager : MonoBehaviour, IManager {
     {
         player.SetActive(true);
         player.transform.position = new Vector3(0.0f, 1.0f, 0.0f);
+    }
+
+    public void GameStart() {
+        SpawnPlayer();
+        onGameStartEvent?.Invoke();
     }
 
     public void GameOver()
