@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c788c6504b634ec4e856a00867624fe5, type: 3}
-  m_Name: WaveSet
+  m_Script: {fileID: 11500000, guid: 6bbecfe8576d39b428affd150e4a55cc, type: 3}
+  m_Name: wallWave
   m_EditorClassIdentifier: 
-  spawns:
-  - {fileID: 11400000, guid: a20f9a88cca04e84f82a9ddbddb69760, type: 2}
+  firstTime: 30
+  timeBetweenWaves: 40
+  waveDuration: 2
+  spawnSet: {fileID: 11400000, guid: cf2fff5a315da084b801cdcedc505e05, type: 2}
+  startTimeScaleShift: 0.5

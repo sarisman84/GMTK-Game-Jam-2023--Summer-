@@ -14,3 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawns:
   - {fileID: 11400000, guid: 4fcec2a9c8375ee4f87d621a3d11293a, type: 2}
+  - {fileID: 11400000, guid: d083972d8d758b1458ba95af9037de43, type: 2}
+  scaleCurve:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.20636094
+        inSlope: 0.016534448
+        outSlope: 0.016534448
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0.22289538
+        inSlope: 0.016534448
+        outSlope: 0.016534448
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    continuationBehaviour: 3
+    scalePerSecond: 0.1

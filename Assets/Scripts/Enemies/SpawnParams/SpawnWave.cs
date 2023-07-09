@@ -14,7 +14,7 @@ public class SpawnWave : ScriptableObject
     public SpawnSet spawnSet;
 
     [Space]
-    [Header("scaling")]
+    [Header("scaling (scales the strenth of the wave with gametime)")]
     public float startTimeScaleShift = 0.0f;
 
     public float GetNextWaveTime(float currentTime) {

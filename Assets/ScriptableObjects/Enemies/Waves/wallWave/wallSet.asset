@@ -9,38 +9,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5768830fa85e047a7fc313d838532d, type: 3}
-  m_Name: simpleEnemy
+  m_Script: {fileID: 11500000, guid: c788c6504b634ec4e856a00867624fe5, type: 3}
+  m_Name: wallSet
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8190690362109376037, guid: 54cd75bf9f9511e4ba93e5edd29cea91, type: 3}
-  spawnRate:
+  spawns:
+  - {fileID: 11400000, guid: bbdd3d640e3c3e84290be134a73f587f, type: 2}
+  scaleCurve:
     curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 0.51546234
-        outSlope: 0.51546234
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
+        outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: 0.51546234
-        inSlope: 0.51546234
-        outSlope: 0.51546234
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    continuationBehaviour: 1
-    scalePerSecond: 0.1
-  diviationType: 0
-  diviation: 0
-  spawnHeight: 2
-  sizeRad: 1
+    continuationBehaviour: 0
+    scalePerSecond: 0

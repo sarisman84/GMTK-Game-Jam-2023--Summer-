@@ -7,8 +7,16 @@ public class RateSpawner : ScriptableObject
 
     [SerializeField]
     private GameObject prefab;
+
+    //The spawnRate is treated as a linear function, so the integration becomes trivial
     [SerializeField]
-    private ExtrapolateCurve spawnRate;//its probability density, because we integrate over it to get the actual probability
+    private float spawnIncrease = 1.0f;
+    [SerializeField]
+    private float spawnOffset = 0.0f;
+    [SerializeField]
+    private float spawnStart = 0.0f;
+    //[SerializeField]
+    //private ExtrapolateCurve spawnRate;//its probability density, because we integrate over it to get the actual probability
 
     [Space]
     public DiviationType diviationType;
@@ -28,9 +36,19 @@ public class RateSpawner : ScriptableObject
             default: return exact;
         }
     }
+
+    private float GetSpawnCountExact(float timeA, float timeB) {
+        //return the integral of the spawn-rate from timeA to timeB
+        //the spawn-rate is described by: spawnIncrease * (t-spawnStart) + spawnOffset = spawnIncrease * t + (spawnOffset - spawnIncrease*spawnStart)
+        //the integral between a and b is: 0.5*spawnIncrease * (b*b - a*a) + spawnOffset * (b - a)
+        float spawnCount = 0.5f * spawnIncrease * (timeB*timeB - timeA*timeA) + (spawnOffset - spawnIncrease*spawnStart) * (timeB-timeA);
+        return Mathf.Max(spawnCount, 0);
+    }
+
+    /*
     private float GetSpawnCountExact(float timeA, float timeB) => Integrate(timeA, timeB, spawnRate.GetValue);
 
-    public static float Integrate(float timeA, float timeB, Func<float, float> timeToVal, float baseDt = 1 / 200.0f/*corresponds to 200 samples every second*/) {
+    public static float Integrate(float timeA, float timeB, Func<float, float> timeToVal, float baseDt = 1 / 200.0f) {
     float timeDiff = timeB - timeA;
         int integrationSteps = Mathf.Clamp(Mathf.FloorToInt(timeDiff / baseDt), 1, 10);//we will use at most 10 steps, and minimal 1
         float dt = timeDiff / integrationSteps;//by flooring to an exact amout, we stretch the timesteps to fit exactly the timeframe
@@ -40,7 +58,7 @@ public class RateSpawner : ScriptableObject
         }
 
         return sum;
-    }
+    }*/
 
     public static float SampleNormalDistr(float mean, float scale) {//https://en.wikipedia.org/wiki/Normal_distribution
         //using the cumulative distribution function to take a random sample (but invert it)
@@ -60,6 +78,7 @@ public class RateSpawner : ScriptableObject
 public class RateSpawnTracker {
     public int spawnedCount { get; private set; } = 0;
     private float currentIntegralVal = 0;
+    public float currentSpawnRate { get; private set; } = 0;
     public float lastTime { get; private set; }
 
     public RateSpawner spawner;
@@ -69,7 +88,10 @@ public class RateSpawnTracker {
     }
 
     public void Update(float currentTime) {
-        currentIntegralVal += spawner.GetSpawnFloat(lastTime, currentTime);
+        float spawnedInSpan = spawner.GetSpawnFloat(lastTime, currentTime);
+        currentIntegralVal += spawnedInSpan;
+
+        currentSpawnRate = spawnedInSpan / (currentTime - lastTime);//spawns per second
         lastTime = currentTime;
     }
 

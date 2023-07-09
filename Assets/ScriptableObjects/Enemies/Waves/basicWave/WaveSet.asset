@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5768830fa85e047a7fc313d838532d, type: 3}
-  m_Name: simpleEnemyWave
+  m_Script: {fileID: 11500000, guid: c788c6504b634ec4e856a00867624fe5, type: 3}
+  m_Name: WaveSet
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8190690362109376037, guid: 54cd75bf9f9511e4ba93e5edd29cea91, type: 3}
-  spawnRate:
+  spawns:
+  - {fileID: 11400000, guid: a20f9a88cca04e84f82a9ddbddb69760, type: 2}
+  - {fileID: 11400000, guid: a3149698a63a2224a9cb1eaa8a5b5b7c, type: 2}
+  scaleCurve:
     curve:
       serializedVersion: 2
       m_Curve:
@@ -29,18 +31,14 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 2.5
-        inSlope: 0.04093039
-        outSlope: 0.04093039
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.3313014
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     continuationBehaviour: 0
-    scalePerSecond: 1
-  diviationType: 0
-  diviation: 0
-  spawnHeight: 0
-  sizeRad: 0
+    scalePerSecond: 0

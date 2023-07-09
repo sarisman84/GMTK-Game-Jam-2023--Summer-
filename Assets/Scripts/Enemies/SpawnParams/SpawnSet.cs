@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnSet : ScriptableObject
 {
     public RateSpawner[] spawns;
+    public ExtrapolateCurve scaleCurve;
 }
 
 [System.Serializable]
@@ -30,10 +31,12 @@ public class SpawnSetTracker {
     public virtual void Update(float dt, Func<RateSpawnTracker, Vector3> getPos, Transform parent = null, float countShift = 0, float countScale = 1) {
         currentTime += dt;
 
+        float scale = spawnSet.scaleCurve.GetValue(currentTime);
+
         foreach (RateSpawnTracker spawner in spawners) {
             spawner.Update(currentTime);
 
-            int count = spawner.GetSpawnCount(countShift, countScale);
+            int count = spawner.GetSpawnCount(countShift, countScale * scale);
             for (int i = 0; i < count; i++) {
                 Vector3 pos = getPos(spawner);
                 if (pos.x == float.PositiveInfinity) {

@@ -772,6 +772,7 @@ MonoBehaviour:
     spawnSet: {fileID: 11400000, guid: 666590ace6dd5aa4284264ab872ac18c, type: 2}
   waveList:
   - {fileID: 11400000, guid: 24df6c2f107b49c409da3e46c2f8ee14, type: 2}
+  - {fileID: 11400000, guid: 074488fbd53e3dc4b845a5ec7e1b0b59, type: 2}
 --- !u!4 &1762114623
 Transform:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7660764023911502715}
   - component: {fileID: 8717988016804205934}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: smallEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 0
-  m_StepOffset: 0.3
+  m_StepOffset: 0.05
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -132,4 +132,3 @@ MonoBehaviour:
   closeAttackDamage: 15
   closeAttackRad: 2
   closeAttackCooldown: 0.25
-  sounds: []
