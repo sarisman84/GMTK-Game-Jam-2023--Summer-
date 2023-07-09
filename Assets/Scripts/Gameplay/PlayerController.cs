@@ -117,7 +117,11 @@ public class PlayerController : Damagable, IManager {
         BackendManager.Get.runtimeActive = aNewState;
         meshFilter.gameObject.SetActive(aNewState);
         if (!aNewState)
+        {
             upgradeManager.ResetUpgrades();
+            maxHealth = baseMaxHealth;
+        }
+           
         else
         {
             upgradeManager.GainWeapon(0);

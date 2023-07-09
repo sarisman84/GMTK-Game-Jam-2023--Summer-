@@ -796,7 +796,60 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< Updated upstream
   m_RootOrder: 9
+=======
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1028040684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1028040686}
+  - component: {fileID: 1028040685}
+  m_Layer: 0
+  m_Name: Enemy Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1028040685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028040684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a702394fb415f6448e8bfe30261afef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRad: 5
+  maxSpawnTries: 5
+  baseSpawnSet:
+    spawnSet: {fileID: 0}
+  waveList: []
+--- !u!4 &1028040686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028040684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+>>>>>>> Stashed changes
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1247197068
 GameObject:
@@ -1082,29 +1135,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05a15725d8caddf41a90aca95d5b83ea, type: 3}
---- !u!1 &1995429181 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6950201799653576459, guid: c89d52d555d9da1448d026c8ce993a76, type: 3}
-  m_PrefabInstance: {fileID: 4926537312046472913}
-  m_PrefabAsset: {fileID: 0}
---- !u!111 &1995429187
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995429181}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 3094330708855449807, guid: 6b7e3e3218ad22b4ca0e510b22640da2, type: 3}
-  m_Animations:
-  - {fileID: 3094330708855449807, guid: c5a743686a5c7bb4a9d207a66a234aa9, type: 3}
-  - {fileID: 3094330708855449807, guid: 6b7e3e3218ad22b4ca0e510b22640da2, type: 3}
-  - {fileID: 3094330708855449807, guid: 5dd5091b635af894f8c57b309e3b0469, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1001 &4926537312046472913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1252,10 +1282,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6950201799653576459, guid: c89d52d555d9da1448d026c8ce993a76, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1995429187}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c89d52d555d9da1448d026c8ce993a76, type: 3}
 --- !u!1001 &8084065997318678407
 PrefabInstance:
