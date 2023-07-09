@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour, IManager {
     public UnityEvent onGameOver;
     public UnityEvent onGameStart;
     public UnityEvent onRuntimeInit;
+    public UnityEvent onGamePaused;
 
 
     void Start()
@@ -29,6 +30,18 @@ public class UIManager : MonoBehaviour, IManager {
     {
         PollingStation.Get<GameplayManager>().GameStart();
         PollingStation.Get<AudioManager>().Play("ingamemusic");
+    }
+
+
+    public void PauseGame()
+    {
+        PollingStation.Get<GameplayManager>().PauseGame();
+        onGamePaused?.Invoke();
+    }
+
+    public void Unpause()
+    {
+        PollingStation.Get<GameplayManager>().UnpauseGame();
     }
 
     public void Quit()

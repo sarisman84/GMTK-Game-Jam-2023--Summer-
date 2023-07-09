@@ -19,6 +19,7 @@ public class SpawnWave : ScriptableObject
 
     public float GetNextWaveTime(float currentTime) {
         currentTime -= firstTime;
+        currentTime = Mathf.Max(currentTime, 0);
         int waveCount = Mathf.FloorToInt(currentTime / (timeBetweenWaves + waveDuration));
         return firstTime + (timeBetweenWaves + waveDuration) * (waveCount + 1);
     }
