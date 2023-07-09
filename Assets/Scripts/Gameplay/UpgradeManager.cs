@@ -11,9 +11,6 @@ public class UpgradeManager : MonoBehaviour, IManager {
 
     public float experienceRequiredToLevelUp;
 
-    private int currentLevel;
-    private float currentExperience;
-
     private bool hasAlreadyLoaded = false;
 
     private PlayerController _player;
@@ -22,6 +19,18 @@ public class UpgradeManager : MonoBehaviour, IManager {
     public PlayerController player
     {
         get { return _player; }
+    }
+
+    public float currentExperience
+    {
+        private set;
+        get;
+    }
+
+    public int currentLevel
+    {
+        private set;
+        get;
     }
 
 
@@ -147,5 +156,7 @@ public class UpgradeManager : MonoBehaviour, IManager {
         {
             weapons[i].upgradeCount = 0;
         }
+
+        PollingStation.Get<WeaponHUD>().ClearWeaponHUD();
     }
 }

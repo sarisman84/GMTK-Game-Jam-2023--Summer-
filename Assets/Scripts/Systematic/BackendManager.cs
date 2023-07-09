@@ -24,6 +24,9 @@ public class BackendManager {
     public static void GlobalStart()
     {
         PollingStation.Get<PlayerController>().StartCoroutine(Get.UpdateEvent());
+
+
+        PollingStation.Get<GameplayManager>().onGameOverEvent += Get.ResetTimer;
     }
 
 
@@ -72,6 +75,11 @@ public class BackendManager {
         }
     }
 
+
+    void ResetTimer()
+    {
+        _gameTime = 0;
+    }
 
     IEnumerator UpdateEvent()
     {
