@@ -19,7 +19,7 @@ public class Damagable : MonoBehaviour {
     public virtual void Heal(float heal)
     {
         health += heal;
-        health = Mathf.Max(health, maxHealth);
+        health = Mathf.Min(health, maxHealth);
         healthUpdate?.Invoke(this);
     }
 
