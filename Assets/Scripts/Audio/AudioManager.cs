@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+    GameObject audiosourceobject;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Play();
+       
     }
 
 
@@ -62,7 +64,7 @@ public class AudioManager : MonoBehaviour
         Sound s1 = Array.Find(sounds, item => item.name == sound1);
         Sound s2 = Array.Find(sounds, item => item.name == sound2);
         Sound s3 = Array.Find(sounds, item => item.name == sound3);
-        Sound s4 = Array.Find(sounds, item => item.name == sound3);
+        Sound s4 = Array.Find(sounds, item => item.name == sound4);
 
         int randomIndex = UnityEngine.Random.Range(0, 4);
 
@@ -70,16 +72,21 @@ public class AudioManager : MonoBehaviour
         {
             case 1:
                 s1.source.Play();
-
+                s1.source.pitch = UnityEngine.Random.Range(-0.75f, 1.25f);
                 break;
+
             case 2:
                 s2.source.Play();
+                s2.source.pitch = UnityEngine.Random.Range(-0.75f, 1.25f);
                 break;
             case 3:
                 s3.source.Play();
+                s3.source.pitch = UnityEngine.Random.Range(-0.5f, 1.5f);
                 break;
+
             case 4:
                 s4.source.Play();
+                s4.source.pitch = UnityEngine.Random.Range(-0.5f, 1.5f);
                 break;
         }
     }

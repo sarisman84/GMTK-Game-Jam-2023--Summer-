@@ -23,6 +23,9 @@ public class LightingStrike : BaseWeaponObject {
             var enemy = foundEnemies[Random.Range(0, foundEnemies.Count)];
 
             enemy.Hit(attackDamage, aController);
+
+            // AUDIO: Play Lightning Strike SFX
+            FindObjectOfType<AudioManager>().PlayRandomSound("thunderstrike01", "thunderstrike02", "thunderstrike03", "thunderstrike04");
         }
 
     }

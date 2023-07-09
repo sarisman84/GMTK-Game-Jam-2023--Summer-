@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public struct ProjectileDesc<T> where T : MonoBehaviour {
@@ -77,6 +78,10 @@ public class Projectile : MonoBehaviour {
     {
         bool hit;
         Damagable damagable = other.GetComponent<Damagable>();
+
+        // AUDIO: Play Divine Thrusts SFX
+        FindObjectOfType<AudioManager>().PlayRandomSound("divinethrust01", "divinethrust02", "divinethrust03", "divinethrust04");
+
         if (damagable)
             hit = Hit(damagable);
         else
@@ -84,7 +89,6 @@ public class Projectile : MonoBehaviour {
             HitLifeless(other);
             hit = true;
         }
-
         if (destroyOnHit && hit)
         {
             Destroy(gameObject);

@@ -547,6 +547,8 @@ MonoBehaviour:
     pitch: 1
     volume: 0.7
     spatialblend: 0
+    mindistance: 0
+    maxdistance: 0
     loop: 0
     source: {fileID: 0}
   - name: ingamemusic
@@ -554,6 +556,8 @@ MonoBehaviour:
     pitch: 1
     volume: 0.4
     spatialblend: 0
+    mindistance: 0
+    maxdistance: 0
     loop: 1
     source: {fileID: 0}
   - name: death
@@ -561,6 +565,80 @@ MonoBehaviour:
     pitch: 1
     volume: 0.4
     spatialblend: 0
+    mindistance: 0
+    maxdistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: divinethrust01
+    clip: {fileID: 8300000, guid: 4f2fb5628dfa52a49a546451d1cae53c, type: 3}
+    pitch: 1
+    volume: 3
+    spatialblend: 0
+    mindistance: 0
+    maxdistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: divinethrust02
+    clip: {fileID: 8300000, guid: 21abf3600065c8a4f96b707ebf8f134e, type: 3}
+    pitch: 1
+    volume: 3
+    spatialblend: 0
+    mindistance: 0
+    maxdistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: divinethrust03
+    clip: {fileID: 8300000, guid: 9aef4f02f5a0f22428b7c567d32c2890, type: 3}
+    pitch: 1
+    volume: 3
+    spatialblend: 0
+    mindistance: 0
+    maxdistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: divinethrust04
+    clip: {fileID: 8300000, guid: 0d6350147d27fd343828f2769cf60e38, type: 3}
+    pitch: 1
+    volume: 3
+    spatialblend: 0
+    mindistance: 0
+    maxdistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: thunderstrike01
+    clip: {fileID: 8300000, guid: 0639d7e89890f6d4280dbb9dbd74990e, type: 3}
+    pitch: 1
+    volume: 0.25
+    spatialblend: 0
+    mindistance: 0
+    maxdistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: thunderstrike02
+    clip: {fileID: 8300000, guid: 8fb4d3caf165e3049b59c1eb48a53a3a, type: 3}
+    pitch: -0.5
+    volume: 0.25
+    spatialblend: 0
+    mindistance: 0
+    maxdistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: thunderstrike03
+    clip: {fileID: 8300000, guid: f460c0f900d286a44b514ccfbd673f74, type: 3}
+    pitch: 1
+    volume: 0.25
+    spatialblend: 0
+    mindistance: 0
+    maxdistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: thunderstrike04
+    clip: {fileID: 8300000, guid: a013dc65d9b445140afd4f8ef56d49dc, type: 3}
+    pitch: 1
+    volume: 0.25
+    spatialblend: 0
+    mindistance: 0
+    maxdistance: 0
     loop: 0
     source: {fileID: 0}
 --- !u!1001 &1596053679
