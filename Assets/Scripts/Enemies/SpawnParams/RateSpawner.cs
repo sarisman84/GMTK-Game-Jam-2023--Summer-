@@ -73,8 +73,8 @@ public class RateSpawnTracker {
         lastTime = currentTime;
     }
 
-    public int GetSpawnCount() {//how many objects still need to be spawned to get to the currentIntegralValue
-        return Mathf.RoundToInt(currentIntegralVal) - spawnedCount;
+    public int GetSpawnCount(float countShift = 0, float countScale = 1) {//how many objects still need to be spawned to get to the currentIntegralValue
+        return Mathf.RoundToInt(countScale * currentIntegralVal + countShift) - spawnedCount;
     }
 
     public GameObject Spawn(Vector3 pos, Transform parent = null) {

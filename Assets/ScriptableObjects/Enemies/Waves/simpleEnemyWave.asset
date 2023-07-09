@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e5768830fa85e047a7fc313d838532d, type: 3}
-  m_Name: simpleEnemy
+  m_Name: simpleEnemyWave
   m_EditorClassIdentifier: 
   prefab: {fileID: 8190690362109376037, guid: 54cd75bf9f9511e4ba93e5edd29cea91, type: 3}
   spawnRate:
@@ -19,7 +19,7 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -27,20 +27,20 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 15
-        value: 6
-        inSlope: 0
-        outSlope: 0
+        time: 1
+        value: 2.5
+        inSlope: 0.04093039
+        outSlope: 0.04093039
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.3313014
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 0
+      m_PostInfinity: 2
       m_RotationOrder: 4
-    continuationBehaviour: 2
-    scalePerSecond: 0.1
+    continuationBehaviour: 0
+    scalePerSecond: 1
   diviationType: 0
   diviation: 0
-  spawnHeight: 2
-  sizeRad: 1
+  spawnHeight: 0
+  sizeRad: 0

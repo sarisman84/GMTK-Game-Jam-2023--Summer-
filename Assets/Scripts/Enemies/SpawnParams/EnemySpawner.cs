@@ -9,6 +9,7 @@ public class EnemySpawner : RateSpawner
     public float sizeRad;
 }
 
+/*
 public class EnemySpawnTracker : RateSpawnTracker {
     public new EnemySpawner spawner { 
         get => (EnemySpawner)base.spawner; 
@@ -20,4 +21,4 @@ public class EnemySpawnTracker : RateSpawnTracker {
     public new Enemy Spawn(Vector3 pos, Transform parent = null) {
         return base.Spawn(pos, parent).GetComponent<Enemy>();
     }
-}
+}*/

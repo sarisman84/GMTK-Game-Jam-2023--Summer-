@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,8 +7,11 @@ public class EnemyManager : MonoBehaviour, IManager {
     public int maxSpawnTries = 5;
 
     [SerializeField]
-    private EnemySpawner[] spawns = new EnemySpawner[0];
-    private EnemySpawnTracker[] spawners;
+    private SpawnSetTracker baseSpawnSet;
+
+    public SpawnWave[] waveList;
+    SortedList<float, SpawnWave> waves = new SortedList<float, SpawnWave>();//NOTE: this should work, because the order doesnt change, when the time changes (only once a wave is over, the time changes)
+    WaveTracker activeWave;
 
     private Vector3 playerPos => PollingStation.Get<PlayerController>().transform.position;
 
@@ -16,55 +20,67 @@ public class EnemyManager : MonoBehaviour, IManager {
 
     void Start()
     {
-        spawners = new EnemySpawnTracker[spawns.Length];
-        for (int i = 0; i < spawns.Length; i++) {
-            spawners[i] = new EnemySpawnTracker(spawns[i]);
-        }
+        baseSpawnSet.CreateTrackers();
+        PollingStation.Get<GameplayManager>().onGameStartEvent += GameInit;
+        PollingStation.Get<GameplayManager>().onGameOverEvent += Clear;
+    }
 
-        PollingStation.Get<GameplayManager>().onGameOverEvent += () =>
-        {
-            foreach (var s in spawners)
-            {
-                s.Reset();
-            }
-
-            Destroy(parent.gameObject);
-        };
+    void GameInit() {
+        float currentTime = BackendManager.Get.gameTime;
+        foreach (var wave in waveList) waves.Add(wave.GetNextWaveTime(currentTime), wave);//reset the order of the waves
     }
 
     void Update()
     {
         if (!BackendManager.Get.runtimeActive) return;
-
         float currentTime = BackendManager.Get.gameTime;
-        float lastTime = currentTime - Time.deltaTime;
-        foreach (EnemySpawnTracker spawner in spawners)
-        {
-            spawner.Update(currentTime);
 
-            int count = spawner.GetSpawnCount();
-            for (int i = 0; i < count; i++)
-            {
-                Vector3 pos = getSpawnPos(spawner.spawner.sizeRad, spawner.spawner.spawnHeight);
-                if (pos.x == float.PositiveInfinity)
-                {
-                    Debug.LogWarning("could not find a spawning position");
-                    continue;
-                }
-                Enemy e = spawner.Spawn(pos, GetParent());
+        float nextWaveTime = waves.Keys[0];
+        if (nextWaveTime-currentTime <= 0) {
+            ActivateWave(currentTime, nextWaveTime);
+        }
+
+        if(activeWave != null) {
+            UpdateSpawner(activeWave);
+            if (activeWave.IsWaveOver()) {
+                Debug.Log($"WAVE OVER: {activeWave.wave.name}");
+                activeWave = null;
             }
         }
+        else {
+            UpdateSpawner(baseSpawnSet);
+        }
+    }
+
+    void ActivateWave(float currentTime, float waveTime) {
+        SpawnWave wave = waves.Values[0];
+        waves.RemoveAt(0);
+        waves.Add(wave.GetNextWaveTime(currentTime + 1E-5f), wave);//update the sorted list
+
+        //Start the wave
+        Debug.Log($"WAVE START: {wave.name}");
+        activeWave = new WaveTracker(wave, waveTime);
+    }
+
+    void UpdateSpawner(SpawnSetTracker tracker) {
+        tracker.Update(
+            Time.deltaTime,
+            tracker => {
+                EnemySpawner spawner = (EnemySpawner)tracker.spawner;
+                return getSpawnPos(spawner.sizeRad, spawner.spawnHeight);
+            },
+            GetParent()
+        );
     }
 
     void Clear()
     {
         if (GetParent() != null)
-            Destroy(GetParent());
+            Destroy(GetParent().gameObject);
 
-        foreach (EnemySpawnTracker spawner in spawners)
-        {
-            spawner.Reset();
-        }
+        baseSpawnSet.Reset();
+        activeWave = null;
+        waves.Clear();
     }
 
     public Vector3 getSpawnPos(float radOffset = 0, float height = 0, int recursionCount = 0)
