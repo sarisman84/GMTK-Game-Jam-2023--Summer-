@@ -55,9 +55,11 @@ public class DivineThrust : BaseWeaponObject {
     {
         Vector3 centerPos = aManager.player.transform.position + (closestEnemyDir.normalized * attackRange / 2.0f);
 
+        #if UNITY_EDITOR
         Handles.color = Color.yellow;
         Handles.matrix = Matrix4x4.TRS(centerPos, AngleFromDir(closestEnemyDir, Vector3.up), new Vector3(0.5f, 0.0f, attackRange));
         Handles.DrawWireCube(Vector3.zero, Vector3.one);
         Handles.matrix = Matrix4x4.identity;
+        #endif
     }
 }

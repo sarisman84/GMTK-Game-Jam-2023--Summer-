@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Enemy : Damagable {
     [HideInInspector] public Vector3 velocity;
+    [HideInInspector] public float gravSpeed = 0.0f;
     public float gravityScale = 1.0f;
 
     [HideInInspector] public Transform target;
@@ -30,13 +31,16 @@ public class Enemy : Damagable {
         if (!BackendManager.Get.runtimeActive) return;
         if (!controller.isGrounded)
         {
-            velocity += Physics.gravity * gravityScale * Time.fixedDeltaTime;
-            controller.Move(velocity * Time.fixedDeltaTime);
+            gravSpeed += Physics.gravity.y * gravityScale * Time.fixedDeltaTime;
         }
         else
         {
-            velocity.y = 0;
+            gravSpeed = 0;
         }
+
+        controller.Move(velocity * Time.fixedDeltaTime + Vector3.up * gravSpeed);
+
+        transform.rotation = Quaternion.LookRotation(new Vector3(velocity.x, 0, velocity.z), Vector3.up);
     }
 
     private void Update()

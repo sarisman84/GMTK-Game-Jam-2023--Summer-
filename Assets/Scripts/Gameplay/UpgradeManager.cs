@@ -109,6 +109,8 @@ public class UpgradeManager : MonoBehaviour, IManager {
             upgrades[selectedUpgrade].OnUpdate(_player);
 
             Debug.Log($"Gained Upgrade: {upgrades[selectedUpgrade].GetType().Name}");
+
+            PollingStation.Get<PassiveUpgradeHUD>().AddPassiveUpgrade(upgrades[selectedUpgrade], upgrades[selectedUpgrade].upgradeCount);
         }
         else
         {
