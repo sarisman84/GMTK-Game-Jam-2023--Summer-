@@ -14,16 +14,20 @@ public class UIManager : MonoBehaviour, IManager {
     }
 
     public UnityEvent onGameOver;
+    public UnityEvent onGameStart;
+    public UnityEvent onRuntimeInit;
 
 
     void Start()
     {
         PollingStation.Get<GameplayManager>().onGameOverEvent += () => { onGameOver.Invoke(); };
+        onRuntimeInit.Invoke();
     }
 
     public void StartGame()
     {
         PollingStation.Get<GameplayManager>().SpawnPlayer();
+        onGameStart.Invoke();
     }
 
     public void Quit()

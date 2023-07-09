@@ -129,6 +129,6 @@ MonoBehaviour:
   gravityScale: 1
   target: {fileID: 0}
   amountOfDroppedExperience: 10
-  closeAttackDamage: 100
+  closeAttackDamage: 15
   closeAttackRad: 2
   closeAttackCooldown: 0.25

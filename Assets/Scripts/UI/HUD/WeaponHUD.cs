@@ -49,4 +49,14 @@ public class WeaponHUD : MonoBehaviour, IManager
             .GetComponent<ImageFillAnimator>()
             .StartCooldown(cooldownSec);
     }
+
+
+    public void ClearWeaponHUD()
+    {
+        foreach (var item in weaponToId)
+        {
+            Destroy(item.Value.gameObject);
+        }
+        weaponToId.Clear();
+    }
 }

@@ -163,10 +163,10 @@ MonoBehaviour:
   upgrades:
   - {fileID: 11400000, guid: de9a63c000f4e764fa63fe6e9f3671b5, type: 2}
   weapons:
-  - {fileID: 11400000, guid: c876e70043886de4c957e19592dbfef0, type: 2}
+  - {fileID: 11400000, guid: 1a45a2ef95f2d3f4e8d34ce64ae8ec21, type: 2}
   - {fileID: 11400000, guid: 23af239286e3b2b4d879621b7df6cc29, type: 2}
+  - {fileID: 11400000, guid: c876e70043886de4c957e19592dbfef0, type: 2}
   experienceRequiredToLevelUp: 100
-  currentUpgrades: 
 --- !u!143 &1294793991758076529
 CharacterController:
   m_ObjectHideFlags: 0

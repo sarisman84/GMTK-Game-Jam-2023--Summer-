@@ -118,7 +118,11 @@ public class PlayerController : Damagable, IManager {
         if (!aNewState)
             upgradeManager.ResetUpgrades();
         else
+        {
             upgradeManager.GainWeapon(0);
+            FullyHeal();
+        }
+           
 
     }
 }
