@@ -1,22 +1,14 @@
 using System;
 using UnityEngine;
 
-
 public class RateSpawner : ScriptableObject
 {
-    public enum ContinuationBehaviour { CurveInternal, CurveLinear, ScaledInternal, ScaledLinear }
     public enum DiviationType { None, Constant, Normal }
-
 
     [SerializeField]
     private GameObject prefab;
     [SerializeField]
-    private AnimationCurve spawnRate;//its probability density, because we integrate over it to get the actual probability
-
-    [Space]
-    [SerializeField]
-    private ContinuationBehaviour continuationBehaviour;
-    public float scalePerSecond = 1;
+    private ExtrapolateCurve spawnRate;//its probability density, because we integrate over it to get the actual probability
 
     [Space]
     public DiviationType diviationType;
@@ -24,20 +16,6 @@ public class RateSpawner : ScriptableObject
 
 
     #region SpawnCount Calculation
-    private float GetDensityVal(float time) {
-        ref Keyframe key = ref spawnRate.keys[spawnRate.length - 1];
-        if (time > key.time)
-            switch (continuationBehaviour) {
-                case ContinuationBehaviour.CurveInternal:  return spawnRate.Evaluate(time);                                     //use the internal extrapolation
-                case ContinuationBehaviour.CurveLinear:    return key.value +                key.outTangent * (time - key.time);//linearly extrapolate the probability with the last tangent slope
-                case ContinuationBehaviour.ScaledInternal: return spawnRate.Evaluate(time) * scalePerSecond * (time - key.time);//use the internal extrapolation, but scale it linearly with time
-                case ContinuationBehaviour.ScaledLinear:   return key.value +                scalePerSecond * (time - key.time);//linearly extrapolate the probability with scale factor
-            }
-            
-        return spawnRate.Evaluate(time);
-    }
-
-
     public int GetSpawnCount(float timeA, float timeB) {
         float spawn = GetSpawnFloat(timeA, timeB);
         return Mathf.RoundToInt(spawn);
@@ -50,7 +28,7 @@ public class RateSpawner : ScriptableObject
             default: return exact;
         }
     }
-    private float GetSpawnCountExact(float timeA, float timeB) => Integrate(timeA, timeB, GetDensityVal);
+    private float GetSpawnCountExact(float timeA, float timeB) => Integrate(timeA, timeB, spawnRate.GetValue);
 
     public static float Integrate(float timeA, float timeB, Func<float, float> timeToVal, float baseDt = 1 / 200.0f/*corresponds to 200 samples every second*/) {
     float timeDiff = timeB - timeA;

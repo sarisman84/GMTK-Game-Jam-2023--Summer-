@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,8 +6,8 @@ public class EnemyManager : MonoBehaviour, IManager {
     public int maxSpawnTries = 5;
 
     [SerializeField]
-    private List<EnemySpawner> spawns = new List<EnemySpawner>();
-    private List<EnemySpawnTracker> spawners;
+    private EnemySpawner[] spawns = new EnemySpawner[0];
+    private EnemySpawnTracker[] spawners;
 
     private Vector3 playerPos => PollingStation.Get<PlayerController>().transform.position;
 
@@ -17,10 +16,9 @@ public class EnemyManager : MonoBehaviour, IManager {
 
     void Start()
     {
-        spawners = new List<EnemySpawnTracker>(spawns.Count);
-        foreach (EnemySpawner s in spawns)
-        {
-            spawners.Add(new EnemySpawnTracker(s));
+        spawners = new EnemySpawnTracker[spawns.Length];
+        for (int i = 0; i < spawns.Length; i++) {
+            spawners[i] = new EnemySpawnTracker(spawns[i]);
         }
 
         PollingStation.Get<GameplayManager>().onGameOverEvent += () =>
