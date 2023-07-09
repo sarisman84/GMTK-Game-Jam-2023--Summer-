@@ -6,10 +6,9 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : MonoBehaviour, IManager
 {
     public Sound[] sounds;
-    GameObject audiosourceobject;
 
     private void Awake()
     {
@@ -91,8 +90,10 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
-
+    public void OnLoad()
+    {
+        Awake();
+    }
 }
 
     

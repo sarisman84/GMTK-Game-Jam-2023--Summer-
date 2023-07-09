@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour, IManager {
     {
         PollingStation.Get<GameplayManager>().SpawnPlayer();
         onGameStart.Invoke();
-        FindObjectOfType<AudioManager>().Play("ingamemusic");
+        PollingStation.Get<AudioManager>().Play("ingamemusic");
     }
 
     public void Quit()

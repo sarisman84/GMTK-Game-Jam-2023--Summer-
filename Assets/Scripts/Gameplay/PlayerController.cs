@@ -40,7 +40,7 @@ public class PlayerController : Damagable, IManager {
     }
 
 
-    private void Awake()
+    private void Start()
     {
         PollingStation.Get<TeamsManager>().AddToTeam<PlayerController>(gameObject);
     }

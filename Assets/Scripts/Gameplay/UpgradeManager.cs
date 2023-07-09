@@ -48,7 +48,7 @@ public class UpgradeManager : MonoBehaviour, IManager {
             Debug.Log("Leveled up!");
 
             // AUDIO: play level up sfx
-            FindObjectOfType<AudioManager>().Play("levelup");
+            PollingStation.Get<AudioManager>().Play("levelup");
 
 
             currentLevel++;
@@ -61,9 +61,9 @@ public class UpgradeManager : MonoBehaviour, IManager {
 
                 UpgradeSelectorHUD.SelectionDesc desc = new UpgradeSelectorHUD.SelectionDesc();
 
-               
 
-                if(potentialUpgrade >= upgrades.Count)
+
+                if (potentialUpgrade >= upgrades.Count)
                 {
                     desc.description = weapons[potentialUpgrade - upgrades.Count].upgradeCount > 1 ?
                         weapons[potentialUpgrade - upgrades.Count].upgradeDescription :
@@ -79,7 +79,7 @@ public class UpgradeManager : MonoBehaviour, IManager {
                     upgrades[potentialUpgrade].icon;
 
                 desc.selectionEvent = () => { GainUpgrade(potentialUpgrade); };
-               
+
 
 
                 selections[i] = desc;
@@ -102,7 +102,8 @@ public class UpgradeManager : MonoBehaviour, IManager {
 
             Debug.Log($"Gained Upgrade: {upgrades[selectedUpgrade].GetType().Name}");
         }
-        else {
+        else
+        {
             BaseWeaponObject weapon = weapons[selectedUpgrade - upgrades.Count];
             weapon.upgradeCount++;
             weapon.OnUpgrade(this);
@@ -145,12 +146,12 @@ public class UpgradeManager : MonoBehaviour, IManager {
     {
         if (hasAlreadyLoaded) return;
 
-        ResetUpgrades();
+        ResetUpgrades(false);
 
         hasAlreadyLoaded = true;
     }
 
-    public void ResetUpgrades()
+    public void ResetUpgrades(bool aFullReset = true)
     {
         for (int i = 0; i < upgrades.Count; i++)
         {
@@ -160,7 +161,7 @@ public class UpgradeManager : MonoBehaviour, IManager {
         {
             weapons[i].upgradeCount = 0;
         }
-
-        PollingStation.Get<WeaponHUD>().ClearWeaponHUD();
+        if (aFullReset)
+            PollingStation.Get<WeaponHUD>().ClearWeaponHUD();
     }
 }

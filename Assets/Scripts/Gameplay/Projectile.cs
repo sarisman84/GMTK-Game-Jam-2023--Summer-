@@ -80,7 +80,7 @@ public class Projectile : MonoBehaviour {
         Damagable damagable = other.GetComponent<Damagable>();
 
         // AUDIO: Play Divine Thrusts SFX
-        FindObjectOfType<AudioManager>().PlayRandomSound("divinethrust01", "divinethrust02", "divinethrust03", "divinethrust04");
+        PollingStation.Get<AudioManager>().PlayRandomSound("divinethrust01", "divinethrust02", "divinethrust03", "divinethrust04");
 
         if (damagable)
             hit = Hit(damagable);
