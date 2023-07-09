@@ -40,7 +40,9 @@ public class LightingStrike : BaseWeaponObject {
 
     public override void OnDrawGizmo(UpgradeManager aController)
     {
+        #if UNITY_EDITOR
         Handles.color = Color.cyan;
         Handles.DrawWireArc(aController.transform.position, Vector3.up, Vector3.forward, 360.0f, attackRange);
+#endif
     }
 }

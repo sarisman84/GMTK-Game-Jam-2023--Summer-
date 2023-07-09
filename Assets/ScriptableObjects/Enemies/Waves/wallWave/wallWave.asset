@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bbecfe8576d39b428affd150e4a55cc, type: 3}
   m_Name: wallWave
   m_EditorClassIdentifier: 
-  firstTime: 30
+  firstTime: 90
   timeBetweenWaves: 40
   waveDuration: 2
   spawnSet: {fileID: 11400000, guid: cf2fff5a315da084b801cdcedc505e05, type: 2}

@@ -108,9 +108,13 @@ public class EnemyManager : MonoBehaviour, IManager {
         return parent;
     }
 
+
     public void OnDrawGizmosSelected()
     {
+#if UNITY_EDITOR
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(playerPos, Vector3.up, spawnRad);
+#endif
     }
+
 }

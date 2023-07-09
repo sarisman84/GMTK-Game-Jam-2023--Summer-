@@ -48,6 +48,7 @@ public class SwordSwipe : BaseWeaponObject {
 
     public override void OnDrawGizmo(UpgradeManager aController)
     {
+#if UNITY_EDITOR
         Handles.color = Color.red;
         Handles.DrawWireArc(aController.transform.position, Vector3.up, Vector3.forward, 360.0f, attackRange);
 
@@ -59,6 +60,6 @@ public class SwordSwipe : BaseWeaponObject {
 
         Handles.DrawLine(aController.transform.position, aController.transform.position + (viewAngleA).normalized * attackRange);
         Handles.DrawLine(aController.transform.position, aController.transform.position + (viewAngleB).normalized * attackRange);
-
+#endif
     }
 }
