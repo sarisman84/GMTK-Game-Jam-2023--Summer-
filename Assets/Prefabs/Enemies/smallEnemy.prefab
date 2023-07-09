@@ -130,5 +130,5 @@ MonoBehaviour:
   target: {fileID: 0}
   amountOfDroppedExperience: 10
   closeAttackDamage: 1
-  closeAttackRad: 1
+  closeAttackRad: 2
   closeAttackCooldown: 0.25

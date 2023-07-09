@@ -36,13 +36,13 @@ public class PlayerController : Damagable, IManager {
         controller = GetComponent<CharacterController>() != null ? GetComponent<CharacterController>() : gameObject.AddComponent<CharacterController>();
 
         mainCamera = Camera.main;
-
-        healthUpdate += PollingStation.Get<HealthBar>().GetHealth;
     }
 
 
-    private void Start()
+    public override void Start()
     {
+        healthUpdate += PollingStation.Get<HealthBar>().GetHealth;
+        base.Start();
         PollingStation.Get<TeamsManager>().AddToTeam<PlayerController>(gameObject);
     }
 

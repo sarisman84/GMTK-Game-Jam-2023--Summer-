@@ -41,4 +41,4 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     continuationBehaviour: 3
-    scalePerSecond: 0.1
+    scalePerSecond: 0.02

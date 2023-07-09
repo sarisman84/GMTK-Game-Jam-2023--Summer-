@@ -9,7 +9,7 @@ public class Damagable : MonoBehaviour {
 
     public event Action<Damagable> healthUpdate;
 
-    void Start()
+    public virtual void Start()
     {
         maxHealth = baseMaxHealth;
         health = maxHealth;
