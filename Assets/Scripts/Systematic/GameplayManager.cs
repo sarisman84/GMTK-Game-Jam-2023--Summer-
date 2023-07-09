@@ -42,6 +42,19 @@ public class GameplayManager : MonoBehaviour, IManager {
         onGameStartEvent?.Invoke();
     }
 
+    public void PauseGame()
+    {
+        BackendManager.Get.runtimeActive = false;
+    }
+
+
+    public void UnpauseGame()
+    {
+        BackendManager.Get.runtimeActive = true;
+    }
+
+
+
     public void GameOver()
     {
         // AUDIO: stop playing in game music

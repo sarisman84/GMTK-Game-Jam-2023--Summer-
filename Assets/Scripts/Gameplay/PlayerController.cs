@@ -92,6 +92,12 @@ public class PlayerController : Damagable, IManager {
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            PollingStation.Get<UIManager>().PauseGame();
+        }
+
+
         if (!BackendManager.Get.runtimeActive) return;
         UpdateInvurnabilityTimer();
         Movement();
