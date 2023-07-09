@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f1617f9d0a4244a817365c729c3d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHealth: 100
+  baseMaxHealth: 3
   health: 0
   velocity: {x: 0, y: 0, z: 0}
   gravityScale: 1
