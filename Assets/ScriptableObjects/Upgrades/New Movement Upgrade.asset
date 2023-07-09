@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: New Movement Upgrade
   m_EditorClassIdentifier: 
   description: Increase movement speed by something
-  upgradeCount: 0
+  icon: {fileID: 21300000, guid: 8db2bd021047fba40833e040cc85f884, type: 3}
+  upgradeCount: 1
   additionalMovementSpeed: 1
