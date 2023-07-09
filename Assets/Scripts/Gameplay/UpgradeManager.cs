@@ -46,6 +46,8 @@ public class UpgradeManager : MonoBehaviour, IManager {
         if (currentExperience >= experienceRequiredToLevelUp)
         {
             Debug.Log("Leveled up!");
+
+            // AUDIO: play level up sfx
             FindObjectOfType<AudioManager>().Play("levelup");
 
 

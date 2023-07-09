@@ -39,12 +39,13 @@ public class GameplayManager : MonoBehaviour, IManager {
 
     public void GameOver()
     {
+        // AUDIO: stop playing in game music
         FindObjectOfType<AudioManager>().StopPlaying("ingamemusic");
+
+        // AUDIO: play death sfx
         FindObjectOfType<AudioManager>().Play("death");
+
         player.SetActive(false);
-
-
-
         if (onGameOverEvent != null)
             onGameOverEvent();
     }
