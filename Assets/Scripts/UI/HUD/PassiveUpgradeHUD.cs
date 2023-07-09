@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PassiveUpgradeHUD : MonoBehaviour, IManager {
 
     public GameObject passivePrefab;
-    public Dictionary<BaseUpgradeObject, Image> upgradeToImage;
+    public Dictionary<BaseUpgradeObject, Image> upgradeToImage = new Dictionary<BaseUpgradeObject, Image>();
     
     public void OnLoad() {}
 

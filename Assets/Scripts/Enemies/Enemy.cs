@@ -32,6 +32,7 @@ public class Enemy : Damagable {
         {
             velocity += Physics.gravity * gravityScale * Time.fixedDeltaTime;
             controller.Move(velocity * Time.fixedDeltaTime);
+            transform.rotation = Quaternion.LookRotation(new Vector3(velocity.x, 0, velocity.z), Vector3.up);
         }
         else
         {
