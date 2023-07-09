@@ -16,4 +16,4 @@ MonoBehaviour:
   timeBetweenWaves: 20
   waveDuration: 10
   spawnSet: {fileID: 11400000, guid: 35a10fba59a481245a9867c934753d64, type: 2}
-  startTimeScaleShift: 0.5
+  startTimeScaleShift: 0.1

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8190690362109376037, guid: eb742e0279f9a70418519a7e2d11edf5, type: 3}
   spawnIncrease: 0
-  spawnOffset: 0.5
-  spawnStart: 0
+  spawnOffset: 0.2
+  spawnStart: 3
   diviationType: 0
   diviation: 0
   spawnHeight: 0
