@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
@@ -14,6 +15,10 @@ public class HealthBar : MonoBehaviour, IManager
     public void OnLoad() {
         rect = GetComponent<RectTransform>();
         SetHealthPercent(1.0f);
+    }
+
+    public void GetHealth(Damagable oj) {
+        SetHealthPercent(oj.health / oj.maxHealth);
     }
 
     public void SetHealthPercent(float healthZeroToOne) {

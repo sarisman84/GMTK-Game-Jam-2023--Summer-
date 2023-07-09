@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Damagable : MonoBehaviour {
@@ -6,16 +7,20 @@ public class Damagable : MonoBehaviour {
     public float health;
     public float maxHealth { get; set; }
 
+    public event Action<Damagable> healthUpdate;
+
     void Start()
     {
         maxHealth = baseMaxHealth;
         health = maxHealth;
+        healthUpdate?.Invoke(this);
     }
 
     public virtual void Heal(float heal)
     {
         health += heal;
         health = Mathf.Max(health, maxHealth);
+        healthUpdate?.Invoke(this);
     }
 
     public virtual void FullyHeal()
@@ -30,6 +35,7 @@ public class Damagable : MonoBehaviour {
 
         health -= damage;
         health = Mathf.Max(health, 0);
+        healthUpdate?.Invoke(this);
 
         if (health == 0.0f)
             OnDeath(attacker);

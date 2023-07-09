@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : Damagable, IManager {
@@ -38,6 +36,8 @@ public class PlayerController : Damagable, IManager {
         controller = GetComponent<CharacterController>() != null ? GetComponent<CharacterController>() : gameObject.AddComponent<CharacterController>();
 
         mainCamera = Camera.main;
+
+        healthUpdate += PollingStation.Get<HealthBar>().GetHealth;
     }
 
 
@@ -65,7 +65,6 @@ public class PlayerController : Damagable, IManager {
             base.Hit(damage, attacker);
             hasBeenHit = true;
         }
-        PollingStation.Get<HealthBar>().SetHealthPercent(health / baseMaxHealth);
     }
 
     public override void OnDeath(MonoBehaviour attacker)
