@@ -67,15 +67,7 @@ Material:
     - _Cutoff: 0.03
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    - _Fill: 0.6666667
-=======
-    - _Fill: 0
->>>>>>> Stashed changes
-=======
-    - _Fill: 0.368533
->>>>>>> main
+    - _Fill: 0.13333334
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

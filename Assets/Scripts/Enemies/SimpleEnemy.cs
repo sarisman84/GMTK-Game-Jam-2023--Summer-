@@ -10,7 +10,7 @@ public class SimpleEnemy : Enemy
 
         Vector3 dir = target.position - transform.position;
         dir.Normalize();
-        controller.Move(dir * speed * Time.deltaTime);
+        velocity = dir * speed;
     }
 
 }
