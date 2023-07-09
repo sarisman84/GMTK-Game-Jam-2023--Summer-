@@ -8,8 +8,12 @@ public class UpgradeManager : MonoBehaviour, IManager {
     public List<BaseUpgradeObject> upgrades;
     public List<BaseWeaponObject> weapons;
 
+    public ExtrapolateCurve experienceCostMultipler;
+    public float baseExperienceRequiredToLevelUp;
 
-    public float experienceRequiredToLevelUp;
+    [ReadOnly]
+    [SerializeField]
+    private float experienceRequiredToLevelUp;
 
     private bool hasAlreadyLoaded = false;
 
@@ -38,6 +42,7 @@ public class UpgradeManager : MonoBehaviour, IManager {
     {
         _player = GetComponent<PlayerController>();
         upgradeSelector = PollingStation.Get<UpgradeSelectorHUD>();
+        experienceRequiredToLevelUp = baseExperienceRequiredToLevelUp;
     }
     public void AddExperience(float someExperience)
     {
@@ -53,6 +58,9 @@ public class UpgradeManager : MonoBehaviour, IManager {
 
             currentLevel++;
             currentExperience = 0;
+
+            experienceRequiredToLevelUp += baseExperienceRequiredToLevelUp * experienceCostMultipler.GetValue(currentLevel);
+
 
             UpgradeSelectorHUD.SelectionDesc[] selections = new UpgradeSelectorHUD.SelectionDesc[3];
             for (int i = 0; i < selections.Length; i++)
@@ -132,7 +140,7 @@ public class UpgradeManager : MonoBehaviour, IManager {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //DEBUG
-            AddExperience(experienceRequiredToLevelUp);
+            AddExperience(baseExperienceRequiredToLevelUp);
         }
 
         for (int i = 0; i < weapons.Count; i++)
@@ -161,6 +169,9 @@ public class UpgradeManager : MonoBehaviour, IManager {
         {
             weapons[i].upgradeCount = 0;
         }
+        currentLevel = 0;
+        experienceRequiredToLevelUp = baseExperienceRequiredToLevelUp;
+
         if (aFullReset)
             PollingStation.Get<WeaponHUD>().ClearWeaponHUD();
     }

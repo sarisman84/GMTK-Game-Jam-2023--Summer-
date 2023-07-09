@@ -1,16 +1,24 @@
 ﻿using System.Collections;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [CreateAssetMenu(fileName = "New Sword Swipe", menuName = "Upgrades/Weapons/Sword Swipe", order = 0)]
 public class SwordSwipe : BaseWeaponObject {
 
     public float detectionAngle = 20.0f;
 
+    public VisualEffectAsset effectWhenAttacking;
+
     private Vector3 closestEnemyDir;
 
     public override void OnUpdateWeapon(UpgradeManager aController)
     {
+        VFXDesc vfxDesc = new VFXDesc();
+
+      
+
+
         DetectionDesc desc = new DetectionDesc();
 
         closestEnemyDir = GetDirectionToClosestDamagable(aController.player, attackRange);
@@ -20,7 +28,14 @@ public class SwordSwipe : BaseWeaponObject {
         desc.viewAngleInDegrees = detectionAngle;
         desc.originPoint = aController.player;
 
-        var foundDamagables = GetAllDamagablesInAView(desc);
+        vfxDesc.scale = Vector3.one * (attackRange / 4.0f);
+        vfxDesc.position = aController.player.transform.position;
+        vfxDesc.rotation = AngleFromDir(closestEnemyDir, Vector3.up);
+        vfxDesc.effectAsset = effectWhenAttacking;
+
+        PollingStation.Get<ParticleManager>().PlayEffect(vfxDesc);
+
+      var foundDamagables = GetAllDamagablesInAView(desc);
 
         foreach (var item in foundDamagables)
         {

@@ -9,7 +9,7 @@ public class PlayerController : Damagable, IManager {
 
     [Header("Gameplay")]
     public float baseMovementSpeed;
-    [HideInInspector] public float movementSpeed;
+    public float movementSpeed { get; set; }
 
     private UpgradeManager upgradeManager;
     private CharacterController controller;
@@ -30,7 +30,8 @@ public class PlayerController : Damagable, IManager {
 
     //public List<BaseWeaponUpgrade> activeWeapons;
 
-    public void OnLoad() {
+    public void OnLoad()
+    {
         meshFilter = GetComponentInChildren<MeshFilter>();
         movementSpeed = baseMovementSpeed;
         upgradeManager = GetComponent<UpgradeManager>();
@@ -64,13 +65,13 @@ public class PlayerController : Damagable, IManager {
             base.Hit(damage, attacker);
             hasBeenHit = true;
         }
-        PollingStation.Get<HealthBar>().SetHealthPercent(health / maxHealth);
+        PollingStation.Get<HealthBar>().SetHealthPercent(health / baseMaxHealth);
     }
 
     public override void OnDeath(MonoBehaviour attacker)
     {
         PollingStation.Get<GameplayManager>().GameOver();
-      
+
 
     }
 
@@ -123,7 +124,7 @@ public class PlayerController : Damagable, IManager {
             upgradeManager.GainWeapon(0);
             FullyHeal();
         }
-           
+
 
     }
 }

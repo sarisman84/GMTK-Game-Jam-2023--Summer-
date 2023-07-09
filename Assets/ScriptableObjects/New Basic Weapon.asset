@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: New Basic Weapon
   m_EditorClassIdentifier: 
   baseAttackDamage: 1
-  baseAttackSpeed: 1
-  baseAttackRange: 3
-  additionalAttackDamage: 1
+  baseAttackSpeed: 0.85
+  baseAttackRange: 5
+  additionalAttackDamage: 0.25
   additionalAttackSpeed: 0.1
-  additionalAttackRange: 1
+  additionalAttackRange: 0.5
   description: 'Swipe: Slash through enemies'
   upgradeDescription: 'Swipe: Increased damage, fire rate and fire range.'
   icon: {fileID: 21300000, guid: 21c6a2875aa87514fbaa25684b83416f, type: 3}
-  upgradeCount: 2
+  upgradeCount: 0
   detectionAngle: 80

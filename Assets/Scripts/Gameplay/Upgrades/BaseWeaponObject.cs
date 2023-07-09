@@ -130,7 +130,9 @@ public abstract class BaseWeaponObject : ScriptableObject {
         Damagable foundEntity = GetClosestDamagable(anOrigin, aDetectionRadius);
 
         if (!foundEntity) return Vector3.zero;
-        return (foundEntity.transform.position - anOrigin.transform.position).normalized;
+        Vector3 result = (foundEntity.transform.position - anOrigin.transform.position).normalized;
+        result.y = 0;
+        return result;
     }
 
     public static Quaternion AngleFromDir(Vector3 aDirection, Vector3 anUpDir)
