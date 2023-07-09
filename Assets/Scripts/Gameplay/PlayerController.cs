@@ -72,6 +72,8 @@ public class PlayerController : Damagable, IManager {
     public override void OnDeath(MonoBehaviour attacker)
     {
         PollingStation.Get<GameplayManager>().GameOver();
+      
+
     }
 
     private void UpdateInvurnabilityTimer()

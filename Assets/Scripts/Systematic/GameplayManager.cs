@@ -39,7 +39,11 @@ public class GameplayManager : MonoBehaviour, IManager {
 
     public void GameOver()
     {
+        FindObjectOfType<AudioManager>().StopPlaying("ingamemusic");
+        FindObjectOfType<AudioManager>().Play("death");
         player.SetActive(false);
+
+
 
         if (onGameOverEvent != null)
             onGameOverEvent();
@@ -49,11 +53,6 @@ public class GameplayManager : MonoBehaviour, IManager {
     {
         Application.Quit();
     }
-
-
-
-
-
 
 
 }

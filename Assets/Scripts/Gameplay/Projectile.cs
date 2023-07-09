@@ -94,6 +94,7 @@ public class Projectile : MonoBehaviour {
     public virtual bool Hit(Damagable other)
     {
         other.Hit(damage, shooter);
+        
         return true;
     }
 

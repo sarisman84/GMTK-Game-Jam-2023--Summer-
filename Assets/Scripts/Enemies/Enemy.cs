@@ -67,6 +67,7 @@ public class Enemy : Damagable {
     public override void OnDeath(MonoBehaviour attacker)
     {
         Destroy(gameObject);
+        FindObjectOfType<AudioManager>().Play("attack_01");
         PollingStation.Get<UpgradeManager>().AddExperience(amountOfDroppedExperience);
     }
 

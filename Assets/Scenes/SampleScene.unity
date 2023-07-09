@@ -542,10 +542,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: sfx_level_up
+  - name: levelup
     clip: {fileID: 8300000, guid: 62514e49d7139ac409f649d00b26d808, type: 3}
-    pitch: 0
-    volume: 0
+    pitch: 1
+    volume: 0.7
+    loop: 0
+    source: {fileID: 0}
+  - name: ingamemusic
+    clip: {fileID: 8300000, guid: d8e06aecd0ba4f94fb5d2557dd0311ab, type: 3}
+    pitch: 1
+    volume: 0.4
+    loop: 1
+    source: {fileID: 0}
+  - name: death
+    clip: {fileID: 8300000, guid: 763d49ec84a95e24a8c768429d6af758, type: 3}
+    pitch: 1
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: attack_01
+    clip: {fileID: 8300000, guid: a0de93ca2340b55488e1072d23d8541e, type: 3}
+    pitch: 1
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: attack_02
+    clip: {fileID: 8300000, guid: 91a81b08d1d1dbd4ea562635e58a3d3d, type: 3}
+    pitch: 1
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: attack_03
+    clip: {fileID: 8300000, guid: 5edd56e9fff359c4eb3af5ff6d836975, type: 3}
+    pitch: 1
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: attack_04
+    clip: {fileID: 8300000, guid: 9366c81656bd2c847a2d1dbf9cdae94a, type: 3}
+    pitch: 1
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: enemy_death_01
+    clip: {fileID: 8300000, guid: e0129de55e9b652429086c8e7619c414, type: 3}
+    pitch: 1
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: enemy_death_02
+    clip: {fileID: 8300000, guid: 6eb781d1793e59149b58c09e6c666001, type: 3}
+    pitch: 1
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: enemy_death_03
+    clip: {fileID: 8300000, guid: 606dd69c8d698e644907e8cbe02e4db9, type: 3}
+    pitch: 1
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: enemy_death_04
+    clip: {fileID: 8300000, guid: 174e2cb66c3c1ee47bee30a9867940d2, type: 3}
+    pitch: 1
+    volume: 0.4
+    loop: 0
     source: {fileID: 0}
 --- !u!1001 &1596053679
 PrefabInstance:
